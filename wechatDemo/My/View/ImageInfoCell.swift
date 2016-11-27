@@ -36,15 +36,15 @@ class ImageInfoCell: UITableViewCell {
         
 
         titleLabel = UILabel.init()
-        titleLabel.backgroundColor = UIColor.clearColor()
-        titleLabel.textColor = UIColor.blackColor()
-        titleLabel.font = UIFont.systemFontOfSize(16)
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = UIColor.black
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.text = "我的二维码"
         self.contentView.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             
             make.left.equalTo(15)
-            make.centerY.equalTo(self.contentView.snp_centerY)
+            make.centerY.equalTo(self.contentView.snp.centerY)
             make.width.equalTo(150)
             make.height.equalTo(20)
         }
@@ -52,10 +52,10 @@ class ImageInfoCell: UITableViewCell {
         let arrowImageView = UIImageView.init()
         arrowImageView.image = UIImage.init(named: "tableview_arrow")
         self.contentView.addSubview(arrowImageView)
-        arrowImageView.snp_makeConstraints { (make) in
+        arrowImageView.snp.makeConstraints { (make) in
             
-            make.right.equalTo(self.contentView.snp_right).offset(-10)
-            make.centerY.equalTo(self.contentView.snp_centerY)
+            make.right.equalTo(self.contentView.snp.right).offset(-10)
+            make.centerY.equalTo(self.contentView.snp.centerY)
             make.width.equalTo(8)
             make.height.equalTo(13)
         }
@@ -63,10 +63,10 @@ class ImageInfoCell: UITableViewCell {
         let qrImageView = UIImageView.init()
         qrImageView.image = UIImage.init(named: "setting_myQR")
         self.contentView.addSubview(qrImageView)
-        qrImageView.snp_makeConstraints { (make) in
+        qrImageView.snp.makeConstraints { (make) in
             
-            make.right.equalTo(arrowImageView.snp_left).offset(-10)
-            make.centerY.equalTo(arrowImageView.snp_centerY)
+            make.right.equalTo(arrowImageView.snp.left).offset(-10)
+            make.centerY.equalTo(arrowImageView.snp.centerY)
             make.width.equalTo(18)
             make.height.equalTo(18)
         }

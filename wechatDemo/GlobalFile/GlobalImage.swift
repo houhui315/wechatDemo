@@ -12,27 +12,27 @@ import UIKit
 
 class GlobalImage: NSObject {
 
-    internal class func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
+    internal class func imageWithColor(_ color: UIColor, size: CGSize) -> UIImage {
         
-        let rect = CGRectMake(0, 0, size.width, size.height)
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return image
+        return image!
     }
     
-    internal class func renderImageWithImageName(image: String) -> UIImage {
+    internal class func renderImageWithImageName(_ image: String) -> UIImage {
         
-        return (UIImage.init(named: image)?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))!
+        return (UIImage.init(named: image)?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))!
     }
     
-    internal class func resizeImageWithEdge(image image:String, edge:UIEdgeInsets) -> UIImage {
+    internal class func resizeImageWithEdge(image:String, edge:UIEdgeInsets) -> UIImage {
         
-        return GlobalImage.renderImageWithImageName(image).resizableImageWithCapInsets(edge)
+        return GlobalImage.renderImageWithImageName(image).resizableImage(withCapInsets: edge)
     }
 }

@@ -30,18 +30,18 @@ class TextCenterCell: UITableViewCell {
     func initSubViews() {
         
         titleLabel = UILabel.init()
-        titleLabel.backgroundColor = UIColor.clearColor()
-        titleLabel.textColor = UIColor.blackColor()
-        titleLabel.textAlignment = NSTextAlignment.Center
-        titleLabel.font = UIFont.systemFontOfSize(16)
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = UIColor.black
+        titleLabel.textAlignment = NSTextAlignment.center
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
         self.contentView.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
     }
     
-    func configforContactObject(message: String) {
+    func configforContactObject(_ message: String) {
         
         titleLabel.text = message
     }

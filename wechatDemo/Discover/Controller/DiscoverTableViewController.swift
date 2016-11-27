@@ -15,7 +15,7 @@ class DiscoverTableViewController: ZXYTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.registerClass(CustomGroupCell.classForCoder(), forCellReuseIdentifier: CustomGroupCell.cellIdentifier)
+        self.tableView.register(CustomGroupCell.classForCoder(), forCellReuseIdentifier: CustomGroupCell.cellIdentifier)
         
         self.testData()
     }
@@ -54,7 +54,7 @@ class DiscoverTableViewController: ZXYTableViewController {
         messageList.append(message6)
     }
 
-    func rowCountOfSection(section: NSInteger) -> NSInteger {
+    func rowCountOfSection(_ section: NSInteger) -> NSInteger {
         
         switch section {
         case 0:
@@ -70,7 +70,7 @@ class DiscoverTableViewController: ZXYTableViewController {
         }
     }
     
-    func countOfSecton(section: Int) -> Int {
+    func countOfSecton(_ section: Int) -> Int {
         
         if section == 0 {
             return 0
@@ -84,9 +84,9 @@ class DiscoverTableViewController: ZXYTableViewController {
         return count
     }
     
-    func indexForIndexPath(indexPath : NSIndexPath) -> Int {
+    func indexForIndexPath(_ indexPath : IndexPath) -> Int {
         
-        let index = self.countOfSecton(indexPath.section) + indexPath.row
+        let index = self.countOfSecton((indexPath as NSIndexPath).section) + (indexPath as NSIndexPath).row
         return index
     }
     
@@ -97,29 +97,29 @@ class DiscoverTableViewController: ZXYTableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 4
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
 
         return self.rowCountOfSection(section)
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CustomGroupCell.cellIdentifier, forIndexPath: indexPath) as! CustomGroupCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomGroupCell.cellIdentifier, for: indexPath) as! CustomGroupCell
         cell.configforContactObject(messageList[self.indexForIndexPath(indexPath)]);
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CustomGroupCell.heightForCell()
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if section == 0 {
             return 15

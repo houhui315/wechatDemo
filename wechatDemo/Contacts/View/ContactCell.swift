@@ -33,7 +33,7 @@ class ContactCell: UITableViewCell {
         
         iconImageView = UIImageView.init()
         self.contentView.addSubview(iconImageView)
-        iconImageView.snp_makeConstraints { (make) in
+        iconImageView.snp.makeConstraints { (make) in
             
             make.left.equalTo(10)
             make.top.equalTo(10)
@@ -42,20 +42,20 @@ class ContactCell: UITableViewCell {
         }
         
         titleLabel = UILabel.init()
-        titleLabel.backgroundColor = UIColor.clearColor()
-        titleLabel.textColor = UIColor.blackColor()
-        titleLabel.font = UIFont.systemFontOfSize(16)
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = UIColor.black
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
         self.contentView.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             
-            make.left.equalTo(iconImageView.snp_right).offset(10)
-            make.centerY.equalTo(self.contentView.snp_centerY)
-            make.right.equalTo(self.contentView.snp_right)
+            make.left.equalTo(iconImageView.snp.right).offset(10)
+            make.centerY.equalTo(self.contentView.snp.centerY)
+            make.right.equalTo(self.contentView.snp.right)
             make.height.equalTo(20)
         }
     }
     
-    func configforContactObject(message: ContactModel) {
+    func configforContactObject(_ message: ContactModel) {
         
         iconImageView.image = UIImage.init(named: message.imageName!)
         titleLabel.text = message.title

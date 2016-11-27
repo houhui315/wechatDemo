@@ -27,22 +27,22 @@ class CContactHeadView: UITableViewHeaderFooterView {
     func initSubViews() {
         
         titleLabel = UILabel.init()
-        titleLabel.backgroundColor = UIColor.clearColor()
+        titleLabel.backgroundColor = UIColor.clear
         titleLabel.textColor = GlobalColor.headerTitleColor
-        titleLabel.font = UIFont.systemFontOfSize(16)
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
         self.contentView.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             
-            make.left.equalTo(self.contentView.snp_left).offset(10)
-            make.top.equalTo(self.contentView.snp_top)
-            make.right.equalTo(self.contentView.snp_right)
-            make.bottom.equalTo(self.contentView.snp_bottom)
+            make.left.equalTo(self.contentView.snp.left).offset(10)
+            make.top.equalTo(self.contentView.snp.top)
+            make.right.equalTo(self.contentView.snp.right)
+            make.bottom.equalTo(self.contentView.snp.bottom)
         }
         
         self.contentView.backgroundColor = GlobalColor.bgColor
     }
     
-    func configforContactObject(message: String) {
+    func configforContactObject(_ message: String) {
         
         titleLabel.text = message
     }

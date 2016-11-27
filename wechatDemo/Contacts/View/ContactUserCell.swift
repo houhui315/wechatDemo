@@ -33,7 +33,7 @@ class ContactUserCell: UITableViewCell {
         
         avatarImageView = UIImageView.init()
         self.contentView.addSubview(avatarImageView)
-        avatarImageView.snp_makeConstraints { (make) in
+        avatarImageView.snp.makeConstraints { (make) in
             
             make.left.equalTo(10)
             make.top.equalTo(10)
@@ -42,20 +42,20 @@ class ContactUserCell: UITableViewCell {
         }
         
         userNameLabel = UILabel.init()
-        userNameLabel.backgroundColor = UIColor.clearColor()
-        userNameLabel.textColor = UIColor.blackColor()
-        userNameLabel.font = UIFont.systemFontOfSize(16)
+        userNameLabel.backgroundColor = UIColor.clear
+        userNameLabel.textColor = UIColor.black
+        userNameLabel.font = UIFont.systemFont(ofSize: 16)
         self.contentView.addSubview(userNameLabel)
-        userNameLabel.snp_makeConstraints { (make) in
+        userNameLabel.snp.makeConstraints { (make) in
             
-            make.left.equalTo(avatarImageView.snp_right).offset(10)
-            make.centerY.equalTo(self.contentView.snp_centerY)
-            make.right.equalTo(self.contentView.snp_right)
+            make.left.equalTo(avatarImageView.snp.right).offset(10)
+            make.centerY.equalTo(self.contentView.snp.centerY)
+            make.right.equalTo(self.contentView.snp.right)
             make.height.equalTo(20)
         }
     }
     
-    func configforContactObject(message: UserContactModel) {
+    func configforContactObject(_ message: UserContactModel) {
         
         avatarImageView.image = UIImage.init(named: message.avatarString!)
         userNameLabel.text = message.userNameString

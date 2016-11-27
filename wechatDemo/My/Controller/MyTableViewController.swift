@@ -17,8 +17,8 @@ class MyTableViewController: ZXYTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.registerClass(UserInfoCell.classForCoder(), forCellReuseIdentifier: UserInfoCell.cellIdentifier)
-        self.tableView.registerClass(CustomGroupCell.classForCoder(), forCellReuseIdentifier: CustomGroupCell.cellIdentifier)
+        self.tableView.register(UserInfoCell.classForCoder(), forCellReuseIdentifier: UserInfoCell.cellIdentifier)
+        self.tableView.register(CustomGroupCell.classForCoder(), forCellReuseIdentifier: CustomGroupCell.cellIdentifier)
         self.testData()
     }
 
@@ -64,19 +64,19 @@ class MyTableViewController: ZXYTableViewController {
     
     func gotoMyInfo() {
         
-        let userInfoVC = UserInfoTableViewController.init(style: UITableViewStyle.Grouped)
+        let userInfoVC = UserInfoTableViewController.init(style: UITableViewStyle.grouped)
         userInfoVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(userInfoVC, animated: true)
     }
     
     func gotoSetting() {
         
-        let userInfoVC = SettingTableViewController.init(style: UITableViewStyle.Grouped)
+        let userInfoVC = SettingTableViewController.init(style: UITableViewStyle.grouped)
         userInfoVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(userInfoVC, animated: true)
     }
     
-    func rowCountOfSection(section: NSInteger) -> NSInteger {
+    func rowCountOfSection(_ section: NSInteger) -> NSInteger {
         
         switch section {
         case 1:
@@ -90,7 +90,7 @@ class MyTableViewController: ZXYTableViewController {
         }
     }
     
-    func countOfSecton(section: Int) -> Int {
+    func countOfSecton(_ section: Int) -> Int {
         
         var count = 0
         for index in 0...(section-1) {
@@ -100,9 +100,9 @@ class MyTableViewController: ZXYTableViewController {
         return count
     }
     
-    func indexForIndexPath(indexPath : NSIndexPath) -> Int {
+    func indexForIndexPath(_ indexPath : IndexPath) -> Int {
         
-        let index = self.countOfSecton(indexPath.section) + indexPath.row
+        let index = self.countOfSecton((indexPath as NSIndexPath).section) + (indexPath as NSIndexPath).row
         return index
     }
     
@@ -113,12 +113,12 @@ class MyTableViewController: ZXYTableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 4
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
             return 1
@@ -127,38 +127,38 @@ class MyTableViewController: ZXYTableViewController {
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(UserInfoCell.cellIdentifier, forIndexPath: indexPath) as! UserInfoCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: UserInfoCell.cellIdentifier, for: indexPath) as! UserInfoCell
             cell.configforContactObject(userInfo)
             return cell
         }else{
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(CustomGroupCell.cellIdentifier, forIndexPath: indexPath) as! CustomGroupCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CustomGroupCell.cellIdentifier, for: indexPath) as! CustomGroupCell
             cell.configforContactObject(messageList[self.indexForIndexPath(indexPath)])
             return cell
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             return UserInfoCell.heightForCell()
         }
         return CustomGroupCell.heightForCell()
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return 5
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let section = indexPath.section
-        let row = indexPath.row
+        let section = (indexPath as NSIndexPath).section
+        let row = (indexPath as NSIndexPath).row
         switch section {
         case 0:
             self.gotoMyInfo()

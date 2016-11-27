@@ -38,7 +38,7 @@ class UserInfoCell: UITableViewCell {
         iconImageView.layer.masksToBounds = true
         iconImageView.layer.cornerRadius = 4
         self.contentView.addSubview(iconImageView)
-        iconImageView.snp_makeConstraints { (make) in
+        iconImageView.snp.makeConstraints { (make) in
             
             make.left.equalTo(10)
             make.top.equalTo(10)
@@ -49,10 +49,10 @@ class UserInfoCell: UITableViewCell {
         let arrowImageView = UIImageView.init()
         arrowImageView.image = UIImage.init(named: "tableview_arrow")
         self.contentView.addSubview(arrowImageView)
-        arrowImageView.snp_makeConstraints { (make) in
+        arrowImageView.snp.makeConstraints { (make) in
             
-            make.right.equalTo(self.contentView.snp_right).offset(-10)
-            make.centerY.equalTo(self.contentView.snp_centerY)
+            make.right.equalTo(self.contentView.snp.right).offset(-10)
+            make.centerY.equalTo(self.contentView.snp.centerY)
             make.width.equalTo(8)
             make.height.equalTo(13)
         }
@@ -60,42 +60,42 @@ class UserInfoCell: UITableViewCell {
         let qrImageView = UIImageView.init()
         qrImageView.image = UIImage.init(named: "setting_myQR")
         self.contentView.addSubview(qrImageView)
-        qrImageView.snp_makeConstraints { (make) in
+        qrImageView.snp.makeConstraints { (make) in
             
-            make.right.equalTo(arrowImageView.snp_left).offset(-10)
-            make.centerY.equalTo(arrowImageView.snp_centerY)
+            make.right.equalTo(arrowImageView.snp.left).offset(-10)
+            make.centerY.equalTo(arrowImageView.snp.centerY)
             make.width.equalTo(18)
             make.height.equalTo(18)
         }
         
         titleLabel = UILabel.init()
-        titleLabel.backgroundColor = UIColor.clearColor()
-        titleLabel.textColor = UIColor.blackColor()
-        titleLabel.font = UIFont.systemFontOfSize(16)
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = UIColor.black
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
         self.contentView.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             
-            make.left.equalTo(iconImageView.snp_right).offset(10)
-            make.top.equalTo(self.contentView.snp_top).offset(20)
-            make.right.equalTo(qrImageView.snp_left).offset(-10)
+            make.left.equalTo(iconImageView.snp.right).offset(10)
+            make.top.equalTo(self.contentView.snp.top).offset(20)
+            make.right.equalTo(qrImageView.snp.left).offset(-10)
             make.height.equalTo(20)
         }
         
         wechatIdLabel = UILabel.init()
-        wechatIdLabel.backgroundColor = UIColor.clearColor()
-        wechatIdLabel.textColor = UIColor.blackColor()
-        wechatIdLabel.font = UIFont.systemFontOfSize(16)
+        wechatIdLabel.backgroundColor = UIColor.clear
+        wechatIdLabel.textColor = UIColor.black
+        wechatIdLabel.font = UIFont.systemFont(ofSize: 16)
         self.contentView.addSubview(wechatIdLabel)
-        wechatIdLabel.snp_makeConstraints { (make) in
+        wechatIdLabel.snp.makeConstraints { (make) in
             
-            make.left.equalTo(titleLabel.snp_left)
-            make.top.equalTo(titleLabel.snp_bottom).offset(10)
-            make.right.equalTo(titleLabel.snp_right)
+            make.left.equalTo(titleLabel.snp.left)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.right.equalTo(titleLabel.snp.right)
             make.height.equalTo(20)
         }
     }
     
-    func configforContactObject(message: UserInfoModel) {
+    func configforContactObject(_ message: UserInfoModel) {
         
         iconImageView.image = UIImage.init(named: message.avatarImageName!)
         titleLabel.text = message.userName

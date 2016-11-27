@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class ZXYActionSheetController: UIViewController {
 
@@ -22,7 +42,7 @@ class ZXYActionSheetController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         titleString = message
-        self.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
+        self.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,7 +50,7 @@ class ZXYActionSheetController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    func addAction(action: ZXYAlertAction)  {
+    func addAction(_ action: ZXYAlertAction)  {
         
         actionList.append(action)
     }
@@ -40,12 +60,12 @@ class ZXYActionSheetController: UIViewController {
         
         control = UIControl.init(frame: GlobalDevice.screenBounds)
         self.view.addSubview(control)
-        control.backgroundColor = UIColor.blackColor()
+        control.backgroundColor = UIColor.black
         control.alpha = 0
-        control.addTarget(self, action: #selector(ZXYActionSheetController.controlTouch), forControlEvents: UIControlEvents.TouchUpInside)
-        UIView.animateWithDuration(animateTime) {
+        control.addTarget(self, action: #selector(ZXYActionSheetController.controlTouch), for: UIControlEvents.touchUpInside)
+        UIView.animate(withDuration: animateTime, animations: {
             self.control.alpha = 0.5
-        }
+        }) 
     }
     
     func initBottomView() {
@@ -59,9 +79,9 @@ class ZXYActionSheetController: UIViewController {
         
         if isHaveTitle {
             
-            let attributes = [NSFontAttributeName:UIFont.systemFontOfSize(14)]
-            let string = NSString(CString: titleString!, encoding: NSUTF8StringEncoding)
-            let rectOfTitle: CGRect = (string?.boundingRectWithSize(CGSizeMake(GlobalDevice.screenWidth - 40, CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil))! as CGRect
+            let attributes = [NSFontAttributeName:UIFont.systemFont(ofSize: 14)]
+            let string = NSString(cString: titleString!, encoding: String.Encoding.utf8.rawValue)
+            let rectOfTitle: CGRect = (string?.boundingRect(with: CGSize(width: GlobalDevice.screenWidth - 40, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes, context: nil))! as CGRect
             heightOfTitle = rectOfTitle.size.height + 40
         }
         
@@ -69,19 +89,19 @@ class ZXYActionSheetController: UIViewController {
         
         let heightOfBottomView = heightOfTitle + CGFloat(actionList.count)*(heightOfActionButton+1)+5.0
         
-        let bottomView = UIView.init(frame: CGRectMake(0, GlobalDevice.screenHeight-heightOfBottomView, GlobalDevice.screenWidth, heightOfBottomView))
-        bottomView.backgroundColor = UIColor.whiteColor()
+        let bottomView = UIView.init(frame: CGRect(x: 0, y: GlobalDevice.screenHeight-heightOfBottomView, width: GlobalDevice.screenWidth, height: heightOfBottomView))
+        bottomView.backgroundColor = UIColor.white
         self.view.addSubview(bottomView)
         self.bottomView = bottomView
         
         if isHaveTitle {
-            let titleLabel = UILabel.init(frame: CGRectMake(20, 0, GlobalDevice.screenWidth - 40, heightOfTitle))
-            titleLabel.backgroundColor = UIColor.clearColor()
+            let titleLabel = UILabel.init(frame: CGRect(x: 20, y: 0, width: GlobalDevice.screenWidth - 40, height: heightOfTitle))
+            titleLabel.backgroundColor = UIColor.clear
             titleLabel.numberOfLines = 0
-            titleLabel.textAlignment = NSTextAlignment.Center
+            titleLabel.textAlignment = NSTextAlignment.center
             titleLabel.textColor = GlobalColor.headerTitleColor
             titleLabel.text = titleString
-            titleLabel.font = UIFont.systemFontOfSize(14)
+            titleLabel.font = UIFont.systemFont(ofSize: 14)
             bottomView.addSubview(titleLabel)
         }
         
@@ -92,32 +112,32 @@ class ZXYActionSheetController: UIViewController {
             let line: UILabel!
             if index == actionList.count-1 {
                 
-                line = UILabel.init(frame: CGRectMake(0, heightOfTop+CGFloat(index)*(heightOfActionButton+1), GlobalDevice.screenWidth, 5))
+                line = UILabel.init(frame: CGRect(x: 0, y: heightOfTop+CGFloat(index)*(heightOfActionButton+1), width: GlobalDevice.screenWidth, height: 5))
                 line.backgroundColor = GlobalColor.bgColor
                 bottomView.addSubview(line)
             }else{
-                line = UILabel.init(frame: CGRectMake(0, heightOfTop+CGFloat(index)*(heightOfActionButton+1), GlobalDevice.screenWidth, 1))
+                line = UILabel.init(frame: CGRect(x: 0, y: heightOfTop+CGFloat(index)*(heightOfActionButton+1), width: GlobalDevice.screenWidth, height: 1))
                 line.backgroundColor = GlobalColor.lineColor
                 bottomView.addSubview(line)
             }
             
-            let button = UIButton.init(type: UIButtonType.Custom)
-            button.frame = CGRectMake(0, CGRectGetMaxY(line.frame), GlobalDevice.screenWidth, heightOfActionButton)
+            let button = UIButton.init(type: UIButtonType.custom)
+            button.frame = CGRect(x: 0, y: line.frame.maxY, width: GlobalDevice.screenWidth, height: heightOfActionButton)
             bottomView.addSubview(button)
-            button.addTarget(self, action: #selector(ZXYActionSheetController.buttonTouch(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            button.addTarget(self, action: #selector(ZXYActionSheetController.buttonTouch(_:)), for: UIControlEvents.touchUpInside)
             button.tag = 10 + index
             let action = actionList[index]
-            button.setTitle(action._title, forState: UIControlState.Normal)
-            button.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 247, g: 247, b: 247), size: CGSizeMake(10, 10)), forState: UIControlState.Highlighted)
+            button.setTitle(action._title, for: UIControlState())
+            button.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 247, g: 247, b: 247), size: CGSize(width: 10, height: 10)), for: UIControlState.highlighted)
             
-            if action._stype == ZXYAlertActionStyle.Destructive {
-                button.setTitleColor(GlobalColor.RGB(r: 233, g: 83, b: 78), forState: UIControlState.Normal)
-            }else if action._stype == ZXYAlertActionStyle.Cancel{
-                button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-            }else if action._stype == ZXYAlertActionStyle.Default{
-                button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            if action._stype == ZXYAlertActionStyle.destructive {
+                button.setTitleColor(GlobalColor.RGB(r: 233, g: 83, b: 78), for: UIControlState())
+            }else if action._stype == ZXYAlertActionStyle.cancel{
+                button.setTitleColor(UIColor.black, for: UIControlState())
+            }else if action._stype == ZXYAlertActionStyle.default{
+                button.setTitleColor(UIColor.black, for: UIControlState())
             }else{
-                button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+                button.setTitleColor(UIColor.black, for: UIControlState())
             }
         }
         
@@ -127,12 +147,12 @@ class ZXYActionSheetController: UIViewController {
         beginRectOfButtonView.origin.y = GlobalDevice.screenHeight
         self.bottomView.frame = beginRectOfButtonView
         
-        UIView.animateWithDuration(animateTime) {
+        UIView.animate(withDuration: animateTime, animations: {
             self.bottomView.frame = afterRectOfButtomView
-        }
+        }) 
     }
     
-    func buttonTouch(btn: UIButton) {
+    func buttonTouch(_ btn: UIButton) {
         
         let action = actionList[btn.tag - 10]
         action._handle!(action)
@@ -142,12 +162,12 @@ class ZXYActionSheetController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.clearColor()
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.view.backgroundColor = UIColor.clear
+        self.edgesForExtendedLayout = UIRectEdge()
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
         self.initControl()
@@ -161,28 +181,28 @@ class ZXYActionSheetController: UIViewController {
         }
     }
     
-    func disMissAndRemoveSubViews(callBack: ()->Void) {
+    func disMissAndRemoveSubViews(_ callBack: @escaping ()->Void) {
         
         var afterControlRect = bottomView.frame
         afterControlRect.origin.y = GlobalDevice.screenHeight
-        UIView.animateWithDuration(animateTime, animations: {
+        UIView.animate(withDuration: animateTime, animations: {
             
             self.bottomView.frame = afterControlRect
             self.control.alpha = 0
-        }) { (bl: Bool) in
+        }, completion: { (bl: Bool) in
             
             self.removeSubViewsOfBottomView()
             self.bottomView.removeFromSuperview()
             self.control.removeFromSuperview()
             
             callBack()
-        }
+        }) 
     }
     
     func controlTouch() {
         
         self.disMissAndRemoveSubViews { 
-            self.dismissViewControllerAnimated(false, completion: nil)
+            self.dismiss(animated: false, completion: nil)
         }
     }
     

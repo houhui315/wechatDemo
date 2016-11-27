@@ -14,9 +14,9 @@ class ZXYTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.clearsSelectionOnViewWillAppear = true
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.edgesForExtendedLayout = UIRectEdge()
         self.tableView.backgroundColor = GlobalColor.bgColor
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         self.tableView.separatorColor = GlobalColor.lineColor
         
     }

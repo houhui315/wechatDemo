@@ -29,7 +29,7 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate {
     func initNavBar() {
         
         self.title = "小伙伴"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_InfoSingle"), style: UIBarButtonItemStyle.Plain, target: self, action:#selector(WeChatViewController.weChatInfo))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_InfoSingle"), style: UIBarButtonItemStyle.plain, target: self, action:#selector(WeChatViewController.weChatInfo))
     }
     
     func initKeyBoardTool() {
@@ -38,12 +38,12 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate {
         keyBoard.delegate = self
         self.addChildViewController(keyBoard)
         self.view.addSubview(keyBoard.view)
-        keyBoard.view.frame = CGRectMake(0, GlobalDevice.appFrameHeight - 50, GlobalDevice.screenWidth, 216 + 50)
+        keyBoard.view.frame = CGRect(x: 0, y: GlobalDevice.appFrameHeight - 50, width: GlobalDevice.screenWidth, height: 216 + 50)
     }
     
     func initVoiceHudView() {
         
-        let voiceHudView = VoiceHudView.init(frame: CGRectZero)
+        let voiceHudView = VoiceHudView.init(frame: CGRect.zero)
         voiceHudView.showInWindow()
         self.voiceControl = voiceHudView
     }
@@ -59,16 +59,16 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate {
     func initBgControl() {
         
         bgControl = UIControl.init()
-        bgControl?.addTarget(self, action: #selector(WeChatViewController.bgControlTouch), forControlEvents: UIControlEvents.TouchUpInside)
+        bgControl?.addTarget(self, action: #selector(WeChatViewController.bgControlTouch), for: UIControlEvents.touchUpInside)
         self.view.addSubview(bgControl!)
-        bgControl?.snp_makeConstraints(closure: { (make) in
+        bgControl?.snp.makeConstraints({ (make) in
             
             make.left.equalTo(0)
-            make.right.equalTo(self.view.snp_right)
-            make.top.equalTo(self.view.snp_top)
-            make.bottom.equalTo(self.view.snp_bottom).offset(-50)
+            make.right.equalTo(self.view.snp.right)
+            make.top.equalTo(self.view.snp.top)
+            make.bottom.equalTo(self.view.snp.bottom).offset(-50)
         })
-        bgControl?.hidden = true
+        bgControl?.isHidden = true
     }
 
     func bgControlTouch() {
@@ -121,14 +121,14 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate {
         self.cancelSendVoice()
     }
     
-    func WKeyBoardWillShow(keyBoardHeight: CGFloat) {
+    func WKeyBoardWillShow(_ keyBoardHeight: CGFloat) {
         
-        bgControl?.hidden = false
+        bgControl?.isHidden = false
         
     }
     
     func WKeyBoardWillHide() {
         
-        bgControl?.hidden = true
+        bgControl?.isHidden = true
     }
 }

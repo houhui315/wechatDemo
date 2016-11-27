@@ -12,7 +12,7 @@ import UIKit
 
 class GlobalColor: NSObject {
 
-    internal static let navTitleColor = UIColor.whiteColor()
+    internal static let navTitleColor = UIColor.white
     
     internal static let navBarBgColor = GlobalColor.RGB(r: 20, g: 20, b: 20)
     
@@ -26,12 +26,12 @@ class GlobalColor: NSObject {
     
     internal static let controlBgColor: UIColor = GlobalColor.RGBA(r: 0, g: 0, b: 0, a: 0.5)
     
-    internal class func RGB(r r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor{
+    internal class func RGB(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor{
         
         return UIColor.init(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1)
     }
     
-    internal class func RGBA(r r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor{
+    internal class func RGBA(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor{
         
         return UIColor.init(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a)
     }

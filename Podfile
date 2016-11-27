@@ -1,5 +1,6 @@
 platform :ios, '8.0'
 use_frameworks!
-pod 'Alamofire', '~> 3.4'
-pod 'SnapKit', '~> 0.22'
-
+target "wechatDemo" do
+pod 'Alamofire', '~> 4.2'
+pod 'SnapKit', '~> 3.0.2'
+end

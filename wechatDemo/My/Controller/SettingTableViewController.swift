@@ -17,8 +17,8 @@ class SettingTableViewController: ZXYTableViewController {
         
         self.title = "设置"
         
-        self.tableView.registerClass(TextInfoCell.classForCoder(), forCellReuseIdentifier: TextInfoCell.cellIdentifier)
-        self.tableView.registerClass(TextCenterCell.classForCoder(), forCellReuseIdentifier: TextCenterCell.cellIdentifier)
+        self.tableView.register(TextInfoCell.classForCoder(), forCellReuseIdentifier: TextInfoCell.cellIdentifier)
+        self.tableView.register(TextCenterCell.classForCoder(), forCellReuseIdentifier: TextCenterCell.cellIdentifier)
         self.testData()
     }
     
@@ -59,7 +59,7 @@ class SettingTableViewController: ZXYTableViewController {
     
     func gotoMyInfo() {
         
-        let userInfoVC = UserInfoTableViewController.init(style: UITableViewStyle.Grouped)
+        let userInfoVC = UserInfoTableViewController.init(style: UITableViewStyle.grouped)
         userInfoVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(userInfoVC, animated: true)
     }
@@ -67,18 +67,18 @@ class SettingTableViewController: ZXYTableViewController {
     func alertLogOut() {
         
         let actionController = ZXYActionSheetController.init(message: "退出后不会删除任何历史数据，下次登录依然可以使用本帐号。")
-        actionController.addAction(ZXYAlertAction.init(title: "退出登录", style: ZXYAlertActionStyle.Destructive, handle: { (action:ZXYAlertAction) in
+        actionController.addAction(ZXYAlertAction.init(title: "退出登录", style: ZXYAlertActionStyle.destructive, handle: { (action:ZXYAlertAction) in
             print("退出登录")
-            NSNotificationCenter.defaultCenter().postNotification(NSNotification.init(name: "LogoutSuccess", object: nil))
+            NotificationCenter.default.post(Notification.init(name: Notification.Name(rawValue: "LogoutSuccess"), object: nil))
         }))
-        actionController.addAction(ZXYAlertAction.init(title: "取消", style: ZXYAlertActionStyle.Cancel, handle: { (action:ZXYAlertAction) in
+        actionController.addAction(ZXYAlertAction.init(title: "取消", style: ZXYAlertActionStyle.cancel, handle: { (action:ZXYAlertAction) in
             print("取消")
         }))
-        self.presentViewController(actionController, animated: false, completion:nil)
+        self.present(actionController, animated: false, completion:nil)
  
     }
     
-    func rowCountOfSection(section: NSInteger) -> NSInteger {
+    func rowCountOfSection(_ section: NSInteger) -> NSInteger {
         
         switch section {
         case 0:
@@ -92,7 +92,7 @@ class SettingTableViewController: ZXYTableViewController {
         }
     }
     
-    func countOfSecton(section: Int) -> Int {
+    func countOfSecton(_ section: Int) -> Int {
         
         if section == 0 {
             return 0
@@ -107,9 +107,9 @@ class SettingTableViewController: ZXYTableViewController {
         }
     }
     
-    func indexForIndexPath(indexPath : NSIndexPath) -> Int {
+    func indexForIndexPath(_ indexPath : IndexPath) -> Int {
         
-        let index = self.countOfSecton(indexPath.section) + indexPath.row
+        let index = self.countOfSecton((indexPath as NSIndexPath).section) + (indexPath as NSIndexPath).row
         return index
     }
     
@@ -120,12 +120,12 @@ class SettingTableViewController: ZXYTableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 4
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         if section < 3 {
             return self.rowCountOfSection(section)
@@ -134,25 +134,25 @@ class SettingTableViewController: ZXYTableViewController {
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section < 3 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(TextInfoCell.cellIdentifier, forIndexPath: indexPath) as! TextInfoCell
+        if (indexPath as NSIndexPath).section < 3 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: TextInfoCell.cellIdentifier, for: indexPath) as! TextInfoCell
             cell.configforContactObject(messageList[self.indexForIndexPath(indexPath)])
             return cell
         }else{
-            let cell = tableView.dequeueReusableCellWithIdentifier(TextCenterCell.cellIdentifier, forIndexPath: indexPath) as! TextCenterCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: TextCenterCell.cellIdentifier, for: indexPath) as! TextCenterCell
             cell.configforContactObject("退出登录")
             return cell
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         return TextInfoCell.heightForCell()
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if section == 0 {
             return 15
@@ -160,10 +160,10 @@ class SettingTableViewController: ZXYTableViewController {
         return 5
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let section = indexPath.section
-        let row = indexPath.row
+        let section = (indexPath as NSIndexPath).section
+        let row = (indexPath as NSIndexPath).row
         switch section {
         case 0:
             print("")

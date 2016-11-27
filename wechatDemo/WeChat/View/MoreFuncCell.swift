@@ -30,34 +30,34 @@ class MoreFuncCell: UITableViewCell {
         
         iconImageView = UIImageView.init()
         self.contentView.addSubview(iconImageView)
-        iconImageView.snp_makeConstraints { (make) in
+        iconImageView.snp.makeConstraints { (make) in
             
             make.left.equalTo(12)
-            make.centerY.equalTo(self.contentView.snp_centerY)
+            make.centerY.equalTo(self.contentView.snp.centerY)
             make.width.equalTo(24)
             make.height.equalTo(24)
         }
         
         titleLabel = UILabel.init()
-        titleLabel.backgroundColor = UIColor.clearColor()
-        titleLabel.textColor = UIColor.whiteColor()
-        titleLabel.font = UIFont.systemFontOfSize(15)
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = UIColor.white
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
         self.contentView.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             
-            make.left.equalTo(iconImageView.snp_right).offset(15)
-            make.centerY.equalTo(self.contentView.snp_centerY)
-            make.right.equalTo(self.contentView.snp_right)
+            make.left.equalTo(iconImageView.snp.right).offset(15)
+            make.centerY.equalTo(self.contentView.snp.centerY)
+            make.right.equalTo(self.contentView.snp.right)
             make.height.equalTo(20)
         }
         
-        self.selectionStyle = UITableViewCellSelectionStyle.None
+        self.selectionStyle = UITableViewCellSelectionStyle.none
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         self.backgroundView = nil
     }
     
-    func congigforMoreAddModel(model: MoreAddModel) {
+    func congigforMoreAddModel(_ model: MoreAddModel) {
         
         iconImageView.image = UIImage.init(named: model.iconImageString!)
         titleLabel.text = model.titleString!

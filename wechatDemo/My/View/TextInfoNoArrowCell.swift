@@ -32,34 +32,34 @@ class TextInfoNoArrowCell: UITableViewCell {
     func initSubViews() {
         
         titleLabel = UILabel.init()
-        titleLabel.backgroundColor = UIColor.clearColor()
-        titleLabel.textColor = UIColor.blackColor()
-        titleLabel.font = UIFont.systemFontOfSize(16)
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = UIColor.black
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
         self.contentView.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             
             make.left.equalTo(15)
-            make.centerY.equalTo(self.contentView.snp_centerY)
+            make.centerY.equalTo(self.contentView.snp.centerY)
             make.width.equalTo(150)
             make.height.equalTo(20)
         }
         
         contentLabel = UILabel.init()
-        contentLabel.backgroundColor = UIColor.clearColor()
+        contentLabel.backgroundColor = UIColor.clear
         contentLabel.textColor = GlobalColor.headerTitleColor
-        contentLabel.font = UIFont.systemFontOfSize(14)
-        contentLabel.textAlignment = NSTextAlignment.Right
+        contentLabel.font = UIFont.systemFont(ofSize: 14)
+        contentLabel.textAlignment = NSTextAlignment.right
         self.contentView.addSubview(contentLabel)
-        contentLabel.snp_makeConstraints { (make) in
+        contentLabel.snp.makeConstraints { (make) in
             
-            make.left.equalTo(titleLabel.snp_right).offset(5)
-            make.centerY.equalTo(self.contentView.snp_centerY)
-            make.right.equalTo(self.contentView.snp_right).offset(-10)
+            make.left.equalTo(titleLabel.snp.right).offset(5)
+            make.centerY.equalTo(self.contentView.snp.centerY)
+            make.right.equalTo(self.contentView.snp.right).offset(-10)
             make.height.equalTo(20)
         }
     }
     
-    func configforContactObject(message: TextInfoModel) {
+    func configforContactObject(_ message: TextInfoModel) {
         
         titleLabel.text = message.titleString
         contentLabel.text = message.contentString

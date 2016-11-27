@@ -18,7 +18,7 @@ protocol WKeyBoardViewControllerDelegate {
     func WkeyBoardVoiceTouchDragExit()
     
     //键盘处理
-    func WKeyBoardWillShow(keyBoardHeight: CGFloat)
+    func WKeyBoardWillShow(_ keyBoardHeight: CGFloat)
     func WKeyBoardWillHide()
     
 }
@@ -42,7 +42,7 @@ class WKeyBoardViewController: UIViewController , UITextViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.multipleTouchEnabled = false
+        self.view.isMultipleTouchEnabled = false
         
         self.initKeyoardTool()
         self.registerKeyBoardObserver()
@@ -51,14 +51,14 @@ class WKeyBoardViewController: UIViewController , UITextViewDelegate{
     
     func registerKeyBoardObserver() {
         
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        let mainQueue = NSOperationQueue.mainQueue()
-        notificationCenter.addObserverForName(UIKeyboardWillShowNotification, object: nil, queue: mainQueue) { (notification: NSNotification) in
+        let notificationCenter = NotificationCenter.default
+        let mainQueue = OperationQueue.main
+        notificationCenter.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: mainQueue) { (notification: Notification) in
             
             self.keyBoardWillShowOrWillHide(notification)
         }
         
-        notificationCenter.addObserverForName(UIKeyboardWillHideNotification, object: nil, queue: mainQueue) { (notification: NSNotification) in
+        notificationCenter.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: mainQueue) { (notification: Notification) in
             
             self.keyBoardWillShowOrWillHide(notification)
         }
@@ -66,22 +66,22 @@ class WKeyBoardViewController: UIViewController , UITextViewDelegate{
     
     func removeKeyBoardObserver() {
         
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        notificationCenter.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    func keyBoardWillShowOrWillHide(notification: NSNotification) {
+    func keyBoardWillShowOrWillHide(_ notification: Notification) {
         
-        let userInfo = notification.userInfo
-        let keyboardFrame = userInfo![UIKeyboardFrameEndUserInfoKey]?.CGRectValue()
+        let userInfo = (notification as NSNotification).userInfo
+        let keyboardFrame = (userInfo![UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
         
         var keyboardHeight = keyboardFrame?.height
         
-        let animationDutation = userInfo![UIKeyboardAnimationDurationUserInfoKey]?.doubleValue
-        let animationCurve = userInfo![UIKeyboardAnimationCurveUserInfoKey]?.integerValue
+        let animationDutation = (userInfo![UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        let animationCurve = (userInfo![UIKeyboardAnimationCurveUserInfoKey] as AnyObject).uint32Value
         var isShowNotification: Bool = false
-        if notification.name == UIKeyboardWillShowNotification {
+        if notification.name == NSNotification.Name.UIKeyboardWillShow {
             
             isShowNotification = true
         }
@@ -94,7 +94,7 @@ class WKeyBoardViewController: UIViewController , UITextViewDelegate{
         
         UIView.beginAnimations("UIViewController+KeyboardAdditions-Animation", context: nil)
         UIView.setAnimationDuration(animationDutation!)
-        UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: animationCurve!)!)
+        UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: Int(animationCurve!))!)
         UIView.setAnimationBeginsFromCurrentState(true)
         UIView.setAnimationDelegate(self)
         
@@ -112,133 +112,132 @@ class WKeyBoardViewController: UIViewController , UITextViewDelegate{
     func initKeyoardTool() {
         
         let toolView = UIView.init()
-        toolView.backgroundColor = UIColor.whiteColor()
-        toolView.layer.borderColor = GlobalColor.lineColor.CGColor
+        toolView.backgroundColor = UIColor.white
+        toolView.layer.borderColor = GlobalColor.lineColor.cgColor
         toolView.layer.borderWidth = 0.5
         toolView.backgroundColor = GlobalColor.RGB(r: 245, g: 245, b: 247)
         _keyBoadToolView = toolView
         self.view.addSubview(toolView)
-        toolView.snp_makeConstraints { (make) in
-            
+        toolView.snp.makeConstraints { (make) in
             make.left.equalTo(0)
-            make.right.equalTo(self.view.snp_right)
+            make.right.equalTo(self.view.snp.right)
             make.top.equalTo(0)
             make.height.equalTo(50)
         }
         
-        let voiceButton = UIButton.init(type: UIButtonType.Custom)
-        voiceButton.setImage(UIImage.init(named: "ToolViewInputVoice"), forState: UIControlState.Normal)
-        voiceButton.setImage(UIImage.init(named: "ToolViewInputVoiceHL"), forState: UIControlState.Highlighted)
+        let voiceButton = UIButton.init(type: UIButtonType.custom)
+        voiceButton.setImage(UIImage.init(named: "ToolViewInputVoice"), for: UIControlState())
+        voiceButton.setImage(UIImage.init(named: "ToolViewInputVoiceHL"), for: UIControlState.highlighted)
         _voiceButton = voiceButton
-        voiceButton.addTarget(self, action: #selector(WKeyBoardViewController.voiceButtonTouch), forControlEvents: UIControlEvents.TouchUpInside)
+        voiceButton.addTarget(self, action: #selector(WKeyBoardViewController.voiceButtonTouch), for: UIControlEvents.touchUpInside)
         toolView.addSubview(voiceButton)
-        voiceButton.snp_makeConstraints { (make) in
+        voiceButton.snp.makeConstraints { (make) in
             
             make.left.equalTo(2)
-            make.bottom.equalTo(toolView.snp_bottom).offset(-7.5)
-            make.size.equalTo(CGSizeMake(35, 35))
+            make.bottom.equalTo(toolView.snp.bottom).offset(-7.5)
+            make.size.equalTo(CGSize(width: 35, height: 35))
         }
         
-        let keyBoardButton = UIButton.init(type: UIButtonType.Custom)
-        keyBoardButton.setImage(UIImage.init(named: "ToolViewKeyboard"), forState: UIControlState.Normal)
-        keyBoardButton.setImage(UIImage.init(named: "ToolViewKeyboardHL"), forState: UIControlState.Highlighted)
+        let keyBoardButton = UIButton.init(type: UIButtonType.custom)
+        keyBoardButton.setImage(UIImage.init(named: "ToolViewKeyboard"), for: UIControlState())
+        keyBoardButton.setImage(UIImage.init(named: "ToolViewKeyboardHL"), for: UIControlState.highlighted)
         _keyBoardButton = keyBoardButton
-        keyBoardButton.addTarget(self, action: #selector(WKeyBoardViewController.keyBoardButtonTouch), forControlEvents: UIControlEvents.TouchUpInside)
+        keyBoardButton.addTarget(self, action: #selector(WKeyBoardViewController.keyBoardButtonTouch), for: UIControlEvents.touchUpInside)
         toolView.addSubview(keyBoardButton)
-        keyBoardButton.snp_makeConstraints { (make) in
+        keyBoardButton.snp.makeConstraints { (make) in
             
             make.left.equalTo(2)
             make.bottom.equalTo(voiceButton)
-            make.size.equalTo(CGSizeMake(35, 35))
+            make.size.equalTo(CGSize(width: 35, height: 35))
         }
         
-        let moreButton = UIButton.init(type: UIButtonType.Custom)
-        moreButton.setImage(UIImage.init(named: "TypeSelectorBtn_Black"), forState: UIControlState.Normal)
-        moreButton.setImage(UIImage.init(named: "TypeSelectorBtnHL_Black"), forState: UIControlState.Highlighted)
-        moreButton.addTarget(self, action: #selector(WKeyBoardViewController.moreButtonTouch), forControlEvents: UIControlEvents.TouchUpInside)
+        let moreButton = UIButton.init(type: UIButtonType.custom)
+        moreButton.setImage(UIImage.init(named: "TypeSelectorBtn_Black"), for: UIControlState())
+        moreButton.setImage(UIImage.init(named: "TypeSelectorBtnHL_Black"), for: UIControlState.highlighted)
+        moreButton.addTarget(self, action: #selector(WKeyBoardViewController.moreButtonTouch), for: UIControlEvents.touchUpInside)
         toolView.addSubview(moreButton)
-        moreButton.snp_makeConstraints { (make) in
+        moreButton.snp.makeConstraints { (make) in
             
-            make.right.equalTo(toolView.snp_right).offset(-2)
+            make.right.equalTo(toolView.snp.right).offset(-2)
             make.bottom.equalTo(voiceButton)
-            make.size.equalTo(CGSizeMake(35, 35))
+            make.size.equalTo(CGSize(width: 35, height: 35))
         }
         
-        let emojiButton = UIButton.init(type: UIButtonType.Custom)
-        emojiButton.setImage(UIImage.init(named: "ToolViewEmotion"), forState: UIControlState.Normal)
-        emojiButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), forState: UIControlState.Highlighted)
-        emojiButton.addTarget(self, action: #selector(WKeyBoardViewController.emojiButtonTouch), forControlEvents: UIControlEvents.TouchUpInside)
+        let emojiButton = UIButton.init(type: UIButtonType.custom)
+        emojiButton.setImage(UIImage.init(named: "ToolViewEmotion"), for: UIControlState())
+        emojiButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), for: UIControlState.highlighted)
+        emojiButton.addTarget(self, action: #selector(WKeyBoardViewController.emojiButtonTouch), for: UIControlEvents.touchUpInside)
         toolView.addSubview(emojiButton)
-        emojiButton.snp_makeConstraints { (make) in
+        emojiButton.snp.makeConstraints { (make) in
             
-            make.right.equalTo(moreButton.snp_left).offset(-2)
+            make.right.equalTo(moreButton.snp.left).offset(-2)
             make.bottom.equalTo(voiceButton)
-            make.size.equalTo(CGSizeMake(35, 35))
+            make.size.equalTo(CGSize(width: 35, height: 35))
         }
         
         let inputTextView = UITextView.init()
         inputTextView.layer.cornerRadius = 4
         inputTextView.layer.masksToBounds = true
-        inputTextView.layer.borderColor = GlobalColor.lineColor.CGColor
+        inputTextView.layer.borderColor = GlobalColor.lineColor.cgColor
         inputTextView.layer.borderWidth = 0.5
         inputTextView.backgroundColor = GlobalColor.RGB(r: 252, g: 252, b: 252)
-        inputTextView.font = UIFont.systemFontOfSize(18)
+        inputTextView.font = UIFont.systemFont(ofSize: 18)
         inputTextView.delegate = self
         toolView.addSubview(inputTextView)
         self._inputTextView = inputTextView
-        inputTextView.snp_makeConstraints { (make) in
+        inputTextView.snp.makeConstraints { (make) in
             
             make.top.equalTo(8)
-            make.left.equalTo(voiceButton.snp_right).offset(5)
-            make.right.equalTo(emojiButton.snp_left).offset(-5)
-            make.bottom.equalTo(toolView.snp_bottom).offset(-8)
+            make.left.equalTo(voiceButton.snp.right).offset(5)
+            make.right.equalTo(emojiButton.snp.left).offset(-5)
+            make.bottom.equalTo(toolView.snp.bottom).offset(-8)
         }
         
-        let sayHelloButton = UIButton.init(type: UIButtonType.Custom)
+        let sayHelloButton = UIButton.init(type: UIButtonType.custom)
         sayHelloButton.layer.cornerRadius = 4
         sayHelloButton.layer.masksToBounds = true
-        sayHelloButton.layer.borderColor = GlobalColor.lineColor.CGColor
+        sayHelloButton.layer.borderColor = GlobalColor.lineColor.cgColor
         sayHelloButton.layer.borderWidth = 0.5
-        sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 245, g: 245, b: 247), size: CGSizeMake(10, 10)), forState: UIControlState.Normal)
-        sayHelloButton.setTitle("按住说话", forState: UIControlState.Normal)
-        sayHelloButton.titleLabel?.font = UIFont.boldSystemFontOfSize(16)
-        sayHelloButton.setTitleColor(GlobalColor.RGB(r: 63, g: 63, b: 63), forState: UIControlState.Normal)
+        sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 245, g: 245, b: 247), size: CGSize(width: 10, height: 10)), for: UIControlState())
+        sayHelloButton.setTitle("按住说话", for: UIControlState())
+        sayHelloButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        sayHelloButton.setTitleColor(GlobalColor.RGB(r: 63, g: 63, b: 63), for: UIControlState())
         
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDown), forControlEvents: UIControlEvents.TouchDown)
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDownRepeat), forControlEvents: UIControlEvents.TouchDownRepeat)
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDragEnter), forControlEvents: UIControlEvents.TouchDragEnter)
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDragExit), forControlEvents: UIControlEvents.TouchDragExit)
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchUpInside), forControlEvents: UIControlEvents.TouchUpInside)
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchUpOutside), forControlEvents: UIControlEvents.TouchUpOutside)
-        sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 198, g: 199, b: 202), size: CGSizeMake(10, 10)), forState: UIControlState.Highlighted)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDown), for: UIControlEvents.touchDown)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDownRepeat), for: UIControlEvents.touchDownRepeat)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDragEnter), for: UIControlEvents.touchDragEnter)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDragExit), for: UIControlEvents.touchDragExit)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchUpInside), for: UIControlEvents.touchUpInside)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchUpOutside), for: UIControlEvents.touchUpOutside)
+        sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 198, g: 199, b: 202), size: CGSize(width: 10, height: 10)), for: UIControlState.highlighted)
         _sayHelloButton = sayHelloButton
         toolView.addSubview(sayHelloButton)
-        sayHelloButton.snp_makeConstraints { (make) in
+        sayHelloButton.snp.makeConstraints { (make) in
             
             make.top.equalTo(8)
-            make.left.equalTo(voiceButton.snp_right).offset(5)
-            make.right.equalTo(emojiButton.snp_left).offset(-5)
-            make.bottom.equalTo(toolView.snp_bottom).offset(-8)
+            make.left.equalTo(voiceButton.snp.right).offset(5)
+            make.right.equalTo(emojiButton.snp.left).offset(-5)
+            make.bottom.equalTo(toolView.snp.bottom).offset(-8)
         }
         
-        keyBoardButton.hidden = true
-        sayHelloButton.hidden = true
+        keyBoardButton.isHidden = true
+        sayHelloButton.isHidden = true
     }
     
     func voiceButtonTouch() {
         
-        _voiceButton.hidden = true
-        _keyBoardButton.hidden = false
-        _sayHelloButton.hidden = false
+        _voiceButton.isHidden = true
+        _keyBoardButton.isHidden = false
+        _sayHelloButton.isHidden = false
         
         _inputTextView.endEditing(true)
     }
     
     func keyBoardButtonTouch() {
         
-        _voiceButton.hidden = false
-        _keyBoardButton.hidden = true
-        _sayHelloButton.hidden = true
+        _voiceButton.isHidden = false
+        _keyBoardButton.isHidden = true
+        _sayHelloButton.isHidden = true
         
         _inputTextView.becomeFirstResponder()
     }
@@ -255,8 +254,8 @@ class WKeyBoardViewController: UIViewController , UITextViewDelegate{
     
     func TouchDown() {
         
-        _sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 198, g: 199, b: 202), size: CGSizeMake(10, 10)), forState: UIControlState.Normal)
-        _sayHelloButton.setTitle("松开结束", forState: UIControlState.Normal)
+        _sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 198, g: 199, b: 202), size: CGSize(width: 10, height: 10)), for: UIControlState())
+        _sayHelloButton.setTitle("松开结束", for: UIControlState())
         self.delegate?.WkeyBoardVoiceTouchDown()
     }
     
@@ -287,37 +286,37 @@ class WKeyBoardViewController: UIViewController , UITextViewDelegate{
     }
     
     func sayHelloButtonNormalStatus() {
-        _sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 245, g: 245, b: 247), size: CGSizeMake(10, 10)), forState: UIControlState.Normal)
-        _sayHelloButton.setTitle("按住说话", forState: UIControlState.Normal)
+        _sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 245, g: 245, b: 247), size: CGSize(width: 10, height: 10)), for: UIControlState())
+        _sayHelloButton.setTitle("按住说话", for: UIControlState())
     }
     
 //    #MARK: - UITextViewDelegate
     
     //只有在内容改变时才触发，而且这个改变内容是手动输入有效
-    func textViewDidChange(textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView) {
         
 //        self.resizeHeightOfTextView(textView)
     }
     
     //几乎所有操作都会触发textViewDidChangeSelection，包括点击文本框、增加内容删除内容
-    func textViewDidChangeSelection(textView: UITextView) {
+    func textViewDidChangeSelection(_ textView: UITextView) {
 
         self.resizeHeightOfTextView(textView)
     }
     
     
-    func resizeHeightOfTextView(textView: UITextView) {
+    func resizeHeightOfTextView(_ textView: UITextView) {
         
-        let attributes = [NSFontAttributeName:UIFont.systemFontOfSize(18)]
-        let option:NSStringDrawingOptions = .UsesLineFragmentOrigin
-        let text: NSString = textView.text
-        let height = text.boundingRectWithSize(CGSizeMake(textView.bounds.width, CGFloat.max), options: option, attributes: attributes, context: nil).size.height
+        let attributes = [NSFontAttributeName:UIFont.systemFont(ofSize: 18)]
+        let option:NSStringDrawingOptions = .usesLineFragmentOrigin
+        let text: NSString = textView.text as NSString
+        let height = text.boundingRect(with: CGSize(width: textView.bounds.width, height: CGFloat.greatestFiniteMagnitude), options: option, attributes: attributes, context: nil).size.height
         
         //高度最小值50，最大值100
         let myheight = min(max(height+28, 50), 100)
         
         print("height=\(myheight)")
-        _keyBoadToolView.snp_updateConstraints { (make) in
+        _keyBoadToolView.snp.updateConstraints { (make) in
             
             make.height.equalTo(myheight)
         }

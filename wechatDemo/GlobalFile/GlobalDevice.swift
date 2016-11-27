@@ -13,11 +13,11 @@ import UIKit
 class GlobalDevice: NSObject {
 
     //屏幕宽度
-    internal static let screenWidth: CGFloat = UIScreen.mainScreen().bounds.width
+    internal static let screenWidth: CGFloat = UIScreen.main.bounds.width
     //屏幕高度
-    internal static let screenHeight: CGFloat = UIScreen.mainScreen().bounds.height
+    internal static let screenHeight: CGFloat = UIScreen.main.bounds.height
     //屏幕bounds
-    internal static let screenBounds: CGRect = UIScreen.mainScreen().bounds
+    internal static let screenBounds: CGRect = UIScreen.main.bounds
     //导航栏高度
     internal static let navBarHeight: CGFloat = 44.0
     //状态栏高度

@@ -15,7 +15,7 @@ class ZXYNavigationController: UINavigationController {
         self.initConfig()
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -27,8 +27,8 @@ class ZXYNavigationController: UINavigationController {
         
         let navBar: UINavigationBar = UINavigationBar.appearance()
         navBar.barTintColor = GlobalColor.navBarBgColor
-        navBar.tintColor = UIColor.whiteColor()
-        navBar.barStyle = UIBarStyle.Black
+        navBar.tintColor = UIColor.white
+        navBar.barStyle = UIBarStyle.black
         navBar.titleTextAttributes = [NSForegroundColorAttributeName: GlobalColor.navTitleColor,NSFontAttributeName: GlobalFont.navTitleFont]
     }
     

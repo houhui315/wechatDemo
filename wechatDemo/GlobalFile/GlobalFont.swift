@@ -12,5 +12,5 @@ import UIKit
 
 class GlobalFont: NSObject {
 
-    internal static let navTitleFont = UIFont.systemFontOfSize(19)
+    internal static let navTitleFont = UIFont.systemFont(ofSize: 19)
 }

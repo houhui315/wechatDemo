@@ -39,7 +39,7 @@ class MessageCell: UITableViewCell {
         iconImageView.layer.masksToBounds = true
         iconImageView.layer.cornerRadius = 4
         self.contentView.addSubview(iconImageView)
-        iconImageView.snp_makeConstraints { (make) in
+        iconImageView.snp.makeConstraints { (make) in
          
             make.left.equalTo(10)
             make.top.equalTo(10)
@@ -48,48 +48,48 @@ class MessageCell: UITableViewCell {
         }
         
         timeLabel = UILabel.init()
-        timeLabel.backgroundColor = UIColor.clearColor()
+        timeLabel.backgroundColor = UIColor.clear
         timeLabel.textColor = GlobalColor.RGB(r: 169, g: 169, b: 169)
-        timeLabel.textAlignment = NSTextAlignment.Right
-        timeLabel.font = UIFont.systemFontOfSize(13)
+        timeLabel.textAlignment = NSTextAlignment.right
+        timeLabel.font = UIFont.systemFont(ofSize: 13)
         self.contentView.addSubview(timeLabel)
-        timeLabel.snp_makeConstraints { (make) in
+        timeLabel.snp.makeConstraints { (make) in
             
-            make.top.equalTo(iconImageView.snp_top)
+            make.top.equalTo(iconImageView.snp.top)
             make.width.lessThanOrEqualTo(100)
-            make.right.equalTo(self.contentView.snp_right).offset(-10)
+            make.right.equalTo(self.contentView.snp.right).offset(-10)
             make.height.equalTo(20)
         }
         
         titleLabel = UILabel.init()
-        titleLabel.backgroundColor = UIColor.clearColor()
-        titleLabel.textColor = UIColor.blackColor()
-        titleLabel.font = UIFont.systemFontOfSize(16)
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = UIColor.black
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
         self.contentView.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             
-            make.left.equalTo(iconImageView.snp_right).offset(10)
-            make.top.equalTo(iconImageView.snp_top)
-            make.right.equalTo(timeLabel.snp_left)
+            make.left.equalTo(iconImageView.snp.right).offset(10)
+            make.top.equalTo(iconImageView.snp.top)
+            make.right.equalTo(timeLabel.snp.left)
             make.height.equalTo(20)
         }
 
         contentLabel = UILabel.init()
-        contentLabel.backgroundColor = UIColor.clearColor()
+        contentLabel.backgroundColor = UIColor.clear
         contentLabel.textColor = GlobalColor.RGB(r: 169, g: 169, b: 169)
-        contentLabel.font = UIFont.systemFontOfSize(14)
+        contentLabel.font = UIFont.systemFont(ofSize: 14)
         self.contentView.addSubview(contentLabel)
-        contentLabel.snp_makeConstraints { (make) in
+        contentLabel.snp.makeConstraints { (make) in
             
-            make.left.equalTo(titleLabel.snp_left)
-            make.right.equalTo(self.contentView.snp_right).offset(-10)
-            make.top.equalTo(titleLabel.snp_bottom)
+            make.left.equalTo(titleLabel.snp.left)
+            make.right.equalTo(self.contentView.snp.right).offset(-10)
+            make.top.equalTo(titleLabel.snp.bottom)
             make.height.equalTo(20)
         }
         
     }
     
-    func configforMessageObject(message: messageModel) {
+    func configforMessageObject(_ message: messageModel) {
         
         iconImageView.image = UIImage.init(named: message.imageName!)
         titleLabel.text = message.title

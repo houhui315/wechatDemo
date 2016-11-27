@@ -12,7 +12,7 @@ class UserInfoTableViewController: ZXYTableViewController {
 
     
     override init(style: UITableViewStyle) {
-        super.init(style: UITableViewStyle.Grouped)
+        super.init(style: UITableViewStyle.grouped)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -25,22 +25,22 @@ class UserInfoTableViewController: ZXYTableViewController {
         
         self.title = "个人信息"
         
-        self.tableView.registerClass(AvatarCell.classForCoder(), forCellReuseIdentifier: AvatarCell.cellIdentifier)
-        self.tableView.registerClass(TextInfoCell.classForCoder(), forCellReuseIdentifier: TextInfoCell.cellIdentifier)
-        self.tableView.registerClass(ImageInfoCell.classForCoder(), forCellReuseIdentifier: ImageInfoCell.cellIdentifier)
-        self.tableView.registerClass(CustomGroupCell.classForCoder(), forCellReuseIdentifier: CustomGroupCell.cellIdentifier)
-        self.tableView.registerClass(TextInfoNoArrowCell.classForCoder(), forCellReuseIdentifier: TextInfoNoArrowCell.cellIdentifier)
+        self.tableView.register(AvatarCell.classForCoder(), forCellReuseIdentifier: AvatarCell.cellIdentifier)
+        self.tableView.register(TextInfoCell.classForCoder(), forCellReuseIdentifier: TextInfoCell.cellIdentifier)
+        self.tableView.register(ImageInfoCell.classForCoder(), forCellReuseIdentifier: ImageInfoCell.cellIdentifier)
+        self.tableView.register(CustomGroupCell.classForCoder(), forCellReuseIdentifier: CustomGroupCell.cellIdentifier)
+        self.tableView.register(TextInfoNoArrowCell.classForCoder(), forCellReuseIdentifier: TextInfoNoArrowCell.cellIdentifier)
         
     }
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if section == 0 {
@@ -51,16 +51,16 @@ class UserInfoTableViewController: ZXYTableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let section = indexPath.section
-        let row = indexPath.row
+        let section = (indexPath as NSIndexPath).section
+        let row = (indexPath as NSIndexPath).row
         
         if section == 0 {
             
             switch row {
             case 0:
-                let cell = tableView.dequeueReusableCellWithIdentifier(AvatarCell.cellIdentifier, forIndexPath: indexPath) as! AvatarCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: AvatarCell.cellIdentifier, for: indexPath) as! AvatarCell
                 cell.configforContactObject("userinfoAvatar")
                 return cell
             case 1:
@@ -68,7 +68,7 @@ class UserInfoTableViewController: ZXYTableViewController {
                 textInfoModel.titleString = "名字"
                 textInfoModel.contentString = "：）"
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier(TextInfoCell.cellIdentifier, forIndexPath: indexPath) as! TextInfoCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: TextInfoCell.cellIdentifier, for: indexPath) as! TextInfoCell
                 cell.configforContactObject(textInfoModel)
                 return cell
             case 2:
@@ -76,24 +76,24 @@ class UserInfoTableViewController: ZXYTableViewController {
                 textInfoModel.titleString = "微信号"
                 textInfoModel.contentString = "hahaha"
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier(TextInfoNoArrowCell.cellIdentifier, forIndexPath: indexPath) as! TextInfoNoArrowCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: TextInfoNoArrowCell.cellIdentifier, for: indexPath) as! TextInfoNoArrowCell
                 cell.configforContactObject(textInfoModel)
                 return cell
             case 3:
-                let cell = tableView.dequeueReusableCellWithIdentifier(ImageInfoCell.cellIdentifier, forIndexPath: indexPath) as! ImageInfoCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: ImageInfoCell.cellIdentifier, for: indexPath) as! ImageInfoCell
                 return cell
             case 4:
                 let textInfoModel = TextInfoModel()
                 textInfoModel.titleString = "我的地址"
                 textInfoModel.contentString = "  "
-                let cell = tableView.dequeueReusableCellWithIdentifier(TextInfoCell.cellIdentifier, forIndexPath: indexPath) as! TextInfoCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: TextInfoCell.cellIdentifier, for: indexPath) as! TextInfoCell
                 cell.configforContactObject(textInfoModel)
                 return cell
             default :
                 let textInfoModel = TextInfoModel()
                 textInfoModel.titleString = "微信号"
                 textInfoModel.contentString = "  "
-                let cell = tableView.dequeueReusableCellWithIdentifier(TextInfoCell.cellIdentifier, forIndexPath: indexPath) as! TextInfoCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: TextInfoCell.cellIdentifier, for: indexPath) as! TextInfoCell
                 return cell
             }
             
@@ -104,43 +104,43 @@ class UserInfoTableViewController: ZXYTableViewController {
                 let textInfoModel = TextInfoModel()
                 textInfoModel.titleString = "性别"
                 textInfoModel.contentString = "男"
-                let cell = tableView.dequeueReusableCellWithIdentifier(TextInfoCell.cellIdentifier, forIndexPath: indexPath) as! TextInfoCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: TextInfoCell.cellIdentifier, for: indexPath) as! TextInfoCell
                 cell.configforContactObject(textInfoModel)
                 return cell
             case 1:
                 let textInfoModel = TextInfoModel()
                 textInfoModel.titleString = "地区"
                 textInfoModel.contentString = "广东 深圳"
-                let cell = tableView.dequeueReusableCellWithIdentifier(TextInfoCell.cellIdentifier, forIndexPath: indexPath) as! TextInfoCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: TextInfoCell.cellIdentifier, for: indexPath) as! TextInfoCell
                 cell.configforContactObject(textInfoModel)
                 return cell
             case 2:
                 let textInfoModel = TextInfoModel()
                 textInfoModel.titleString = "个性签名"
                 textInfoModel.contentString = "未填写"
-                let cell = tableView.dequeueReusableCellWithIdentifier(TextInfoCell.cellIdentifier, forIndexPath: indexPath) as! TextInfoCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: TextInfoCell.cellIdentifier, for: indexPath) as! TextInfoCell
                 cell.configforContactObject(textInfoModel)
                 return cell
             default:
                 let textInfoModel = TextInfoModel()
                 textInfoModel.titleString = "个性签名"
                 textInfoModel.contentString = "未填写"
-                let cell = tableView.dequeueReusableCellWithIdentifier(TextInfoCell.cellIdentifier, forIndexPath: indexPath) as! TextInfoCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: TextInfoCell.cellIdentifier, for: indexPath) as! TextInfoCell
                 return cell
             }
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 && indexPath.row == 0 {
+        if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 0 {
             
             return 88
         }
         return CustomGroupCell.heightForCell()
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if section == 0 {
             return 15

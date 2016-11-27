@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class WeChatTableViewController: ZXYTableViewController , MoreAddViewDelegate{
 
@@ -20,18 +21,33 @@ class WeChatTableViewController: ZXYTableViewController , MoreAddViewDelegate{
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
-        self.tableView.registerClass(MessageCell.classForCoder(), forCellReuseIdentifier: MessageCell.cellIdentifier)
+        self.tableView.register(MessageCell.classForCoder(), forCellReuseIdentifier: MessageCell.cellIdentifier)
         self.initTableViewFootViewEmpty()
         
         self.initBarButtonItem()
         self.initBackGroundLogo()
         self.initSearchBar()
         self.testData()
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(forName: NSNotification.Name.AVAudioSessionRouteChange, object: nil, queue: OperationQueue.main) { (notification: Notification) in
+            
+            let dic = (notification as NSNotification).userInfo
+            let changeReason = (dic![AVAudioSessionRouteChangeReasonKey] as AnyObject).uintValue
+            
+            if AVAudioSessionRouteChangeReason.init(rawValue: changeReason!) == AVAudioSessionRouteChangeReason.oldDeviceUnavailable{
+                
+                let routeDescription = dic![AVAudioSessionRouteChangePreviousRouteKey]
+                let outPuts : [AVAssetReaderOutput] = ((routeDescription as AnyObject).outputs)!
+                let portDescription:AVAssetReaderOutput = outPuts.first!
+                print(portDescription)
+            }
+        }
     }
     
     func initBarButtonItem() {
         
-        let barButton = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_add")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(WeChatTableViewController.addButtonTouch))
+        let barButton = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_add")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(WeChatTableViewController.addButtonTouch))
         self.navigationItem.rightBarButtonItem = barButton
     }
     
@@ -55,9 +71,9 @@ class WeChatTableViewController: ZXYTableViewController , MoreAddViewDelegate{
     
     func initSearchBar() {
         
-        searchBar = UISearchBar.init(frame: CGRectMake(0, 0, GlobalDevice.screenWidth, 44))
+        searchBar = UISearchBar.init(frame: CGRect(x: 0, y: 0, width: GlobalDevice.screenWidth, height: 44))
         searchBar.placeholder = "搜索"
-        searchBar.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.bgColor, size: CGSizeMake(1, 44)), forBarPosition: UIBarPosition.Any, barMetrics: UIBarMetrics.Default)
+        searchBar.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.bgColor, size: CGSize(width: 1, height: 44)), for: UIBarPosition.any, barMetrics: UIBarMetrics.default)
         self.tableView.tableHeaderView = searchBar
     }
     
@@ -65,12 +81,12 @@ class WeChatTableViewController: ZXYTableViewController , MoreAddViewDelegate{
         
         let logoImageView = UIImageView.init(image: UIImage.init(named: "ChatListBackgroundLogo"))
         self.tableView.addSubview(logoImageView)
-        logoImageView.snp_makeConstraints { (make) in
+        logoImageView.snp.makeConstraints { (make) in
             
-            make.bottom.equalTo(self.tableView.snp_top).offset(-20)
+            make.bottom.equalTo(self.tableView.snp.top).offset(-20)
             make.width.equalTo(50)
             make.height.equalTo(50)
-            make.centerX.equalTo(self.tableView.snp_centerX)
+            make.centerX.equalTo(self.tableView.snp.centerX)
         }
     }
     
@@ -148,32 +164,32 @@ class WeChatTableViewController: ZXYTableViewController , MoreAddViewDelegate{
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return messageList.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(MessageCell.cellIdentifier, forIndexPath: indexPath) as! MessageCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: MessageCell.cellIdentifier, for: indexPath) as! MessageCell
 
         // Configure the cell...
-        cell.configforMessageObject(messageList[indexPath.row])
+        cell.configforMessageObject(messageList[(indexPath as NSIndexPath).row])
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return MessageCell.heightForCell()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let weChatVC = WeChatViewController()
         weChatVC.hidesBottomBarWhenPushed = true
@@ -182,7 +198,7 @@ class WeChatTableViewController: ZXYTableViewController , MoreAddViewDelegate{
     
     //MARK: -- MoreAddViewDelegate
     
-    func MoreAddViewDidSelectWithIndex(index: Int) {
+    func MoreAddViewDidSelectWithIndex(_ index: Int) {
         
         print("selectIndex=\(index)")
         self.tableViewEnabledScroll(true)
@@ -193,9 +209,9 @@ class WeChatTableViewController: ZXYTableViewController , MoreAddViewDelegate{
         self.tableViewEnabledScroll(true)
     }
     
-    func tableViewEnabledScroll(enabled: Bool){
+    func tableViewEnabledScroll(_ enabled: Bool){
         
-        self.tableView.scrollEnabled = enabled
+        self.tableView.isScrollEnabled = enabled
     }
     
     /*

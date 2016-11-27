@@ -10,9 +10,9 @@ import Foundation
 
 public enum ZXYAlertActionStyle : Int {
     
-    case Default
-    case Cancel
-    case Destructive
+    case `default`
+    case cancel
+    case destructive
 }
 
 class ZXYAlertAction: NSObject {
