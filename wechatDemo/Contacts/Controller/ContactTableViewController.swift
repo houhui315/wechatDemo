@@ -24,7 +24,7 @@ class ContactTableViewController: ZXYTableViewController {
         self.initTableViewFootViewEmpty()
         
         self.tableView.sectionIndexColor = GlobalColor.sectionIndexColor
-        
+        self.tableView.sectionIndexBackgroundColor = GlobalColor.sectionIndexBackGroundColor
         
         self.initBarButtonItem()
         self.initSearchBar()
@@ -52,39 +52,19 @@ class ContactTableViewController: ZXYTableViewController {
     
     func testData() {
         
-        let message1 = ContactModel()
-        message1.imageName = "plugins_FriendNotify"
-        message1.title = "新的朋友"
+        let message1 = ContactModel(imageName:"plugins_FriendNotify",title:"新的朋友")
+        let message2 = ContactModel(imageName:"add_friend_icon_addgroup",title:"群聊")
+        let message3 = ContactModel(imageName:"Contact_icon_ContactTag",title:"标签")
+        let message4 = ContactModel(imageName:"add_friend_icon_offical",title:"公众号")
         
-        let message2 = ContactModel()
-        message2.imageName = "add_friend_icon_addgroup"
-        message2.title = "群聊"
-        
-        let message3 = ContactModel()
-        message3.imageName = "Contact_icon_ContactTag"
-        message3.title = "标签"
-        
-        let message4 = ContactModel()
-        message4.imageName = "add_friend_icon_offical"
-        message4.title = "公众号"
-        
-        messageList.append(message1)
-        messageList.append(message2)
-        messageList.append(message3)
-        messageList.append(message4)
+        messageList = Array.init(arrayLiteral: message1,message2,message3,message4)
         
         //A
-        let contactModel1 = UserContactModel()
-        contactModel1.avatarString = "plugins_FriendNotify"
-        contactModel1.userNameString = "a11re1"
+        let contactModel1 = UserContactModel(avatarString:"plugins_FriendNotify",userNameString:"a11re1")
         
-        let contactModel2 = UserContactModel()
-        contactModel2.avatarString = "plugins_FriendNotify"
-        contactModel2.userNameString = "a11re2"
+        let contactModel2 = UserContactModel(avatarString:"plugins_FriendNotify",userNameString:"a11re2")
         
-        let contactModel3 = UserContactModel()
-        contactModel3.avatarString = "plugins_FriendNotify"
-        contactModel3.userNameString = "a11rea3"
+        let contactModel3 = UserContactModel(avatarString:"plugins_FriendNotify",userNameString:"a11rea3")
         
         let ary1: NSMutableArray = NSMutableArray()
         ary1.add(contactModel1)
@@ -94,17 +74,9 @@ class ContactTableViewController: ZXYTableViewController {
         contactsList.append(dic1)
         
         //B
-        let contactModel21 = UserContactModel()
-        contactModel21.avatarString = "add_friend_icon_addgroup"
-        contactModel21.userNameString = "b11re1"
-        
-        let contactModel22 = UserContactModel()
-        contactModel22.avatarString = "add_friend_icon_addgroup"
-        contactModel22.userNameString = "b11re2"
-        
-        let contactModel23 = UserContactModel()
-        contactModel23.avatarString = "add_friend_icon_addgroup"
-        contactModel23.userNameString = "b11rea3"
+        let contactModel21 = UserContactModel(avatarString:"add_friend_icon_addgroup",userNameString:"b11re1")
+        let contactModel22 = UserContactModel(avatarString:"add_friend_icon_addgroup",userNameString:"b11re2")
+        let contactModel23 = UserContactModel(avatarString:"add_friend_icon_addgroup",userNameString:"b11rea3")
         
         let ary2: NSMutableArray = NSMutableArray()
         ary2.add(contactModel21)
@@ -114,17 +86,11 @@ class ContactTableViewController: ZXYTableViewController {
         contactsList.append(dic2)
         
         //C
-        let contactModel31 = UserContactModel()
-        contactModel31.avatarString = "Contact_icon_ContactTag"
-        contactModel31.userNameString = "c11re1"
+        let contactModel31 = UserContactModel(avatarString:"Contact_icon_ContactTag",userNameString:"c11re1")
         
-        let contactModel32 = UserContactModel()
-        contactModel32.avatarString = "Contact_icon_ContactTag"
-        contactModel32.userNameString = "c11re2"
+        let contactModel32 = UserContactModel(avatarString:"Contact_icon_ContactTag",userNameString:"c11re2")
         
-        let contactModel33 = UserContactModel()
-        contactModel33.avatarString = "Contact_icon_ContactTag"
-        contactModel33.userNameString = "c11rea3"
+        let contactModel33 = UserContactModel(avatarString:"Contact_icon_ContactTag",userNameString:"c11rea3")
         
         let ary3: NSMutableArray = NSMutableArray()
         ary3.add(contactModel31)
@@ -134,17 +100,11 @@ class ContactTableViewController: ZXYTableViewController {
         contactsList.append(dic3)
         
         //E
-        let contactModel41 = UserContactModel()
-        contactModel41.avatarString = "add_friend_icon_offical"
-        contactModel41.userNameString = "e11re1"
+        let contactModel41 = UserContactModel(avatarString:"add_friend_icon_offical",userNameString:"e11re1")
         
-        let contactModel42 = UserContactModel()
-        contactModel42.avatarString = "add_friend_icon_offical"
-        contactModel42.userNameString = "e11re2"
+        let contactModel42 = UserContactModel(avatarString:"add_friend_icon_offical",userNameString:"e11re2")
         
-        let contactModel43 = UserContactModel()
-        contactModel43.avatarString = "add_friend_icon_offical"
-        contactModel43.userNameString = "e11rea3"
+        let contactModel43 = UserContactModel(avatarString:"add_friend_icon_offical",userNameString:"e11rea3")
         
         let ary4: NSMutableArray = NSMutableArray()
         ary4.add(contactModel41)

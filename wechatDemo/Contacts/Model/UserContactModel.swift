@@ -12,4 +12,9 @@ class UserContactModel: NSObject {
 
     var avatarString: String?
     var userNameString: String?
+    init(avatarString:String, userNameString:String) {
+        
+        self.avatarString = avatarString
+        self.userNameString = userNameString
+    }
 }

@@ -24,6 +24,8 @@ class GlobalColor: NSObject {
     
     internal static let sectionIndexColor: UIColor = GlobalColor.RGB(r: 85, g: 85, b: 85)
     
+    internal static let sectionIndexBackGroundColor: UIColor = UIColor.clear
+    
     internal static let controlBgColor: UIColor = GlobalColor.RGBA(r: 0, g: 0, b: 0, a: 0.5)
     
     internal class func RGB(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor{

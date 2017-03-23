@@ -188,7 +188,9 @@ class SettingTableViewController: ZXYTableViewController {
                 break
             }
         case 3:
+            tableView.deselectRow(at: indexPath, animated: true)
             self.alertLogOut()
+            
         default:
             break
         }

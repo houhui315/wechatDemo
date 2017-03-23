@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+    <dict>
+        <key>img</key>
+        <string>sharemore_pic</string>
+        <key>title</key>
+        <string>照片</string>
+	</dict>
+    <dict>
+        <key>img</key>
+        <string>sharemore_video</string>
+        <key>title</key>
+        <string>拍摄</string>
+    </dict>
+    <dict>
+        <key>img</key>
+        <string>sharemore_videovoip</string>
+        <key>title</key>
+        <string>视频聊天</string>
+    </dict>
+    <dict>
+        <key>img</key>
+        <string>sharemore_location</string>
+        <key>title</key>
+        <string>位置</string>
+    </dict>
+    <dict>
+        <key>img</key>
+        <string>sharemore_pic</string>
+        <key>title</key>
+        <string>红包</string>
+    </dict>
+    <dict>
+        <key>img</key>
+        <string>sharemorePay</string>
+        <key>title</key>
+        <string>转账</string>
+    </dict>
+    <dict>
+        <key>img</key>
+        <string>sharemore_friendcard</string>
+        <key>title</key>
+        <string>个人名片</string>
+    </dict>
+    <dict>
+        <key>img</key>
+        <string>sharemore_myfav</string>
+        <key>title</key>
+        <string>收藏</string>
+    </dict>
+    <dict>
+        <key>img</key>
+        <string>sharemore_wallet</string>
+        <key>title</key>
+        <string>卡券</string>
+    </dict>
+</array>
+</plist>
