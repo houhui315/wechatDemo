@@ -15,10 +15,14 @@
 		9704E0A11D61C05300ED3659 /* ImageInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9704E0A01D61C05300ED3659 /* ImageInfoCell.swift */; };
 		9704E0A31D61C9B800ED3659 /* TextInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9704E0A21D61C9B800ED3659 /* TextInfoModel.swift */; };
 		9704E0A51D61CDD400ED3659 /* TextInfoNoArrowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9704E0A41D61CDD400ED3659 /* TextInfoNoArrowCell.swift */; };
+		970811F01E81066D00878EEA /* msgExtern.plist in Resources */ = {isa = PBXBuildFile; fileRef = 970811EF1E81066D00878EEA /* msgExtern.plist */; };
 		97099E0F1D5D60C300A7EEBA /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97099E0C1D5D60C300A7EEBA /* MyTableViewController.swift */; };
 		97099E111D5D613C00A7EEBA /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97099E101D5D613C00A7EEBA /* UserInfoModel.swift */; };
 		97099E131D5D615200A7EEBA /* UserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97099E121D5D615200A7EEBA /* UserInfoCell.swift */; };
 		97099E151D5D693000A7EEBA /* userinfoAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 97099E141D5D693000A7EEBA /* userinfoAvatar.png */; };
+		971818751E82150C004E8DCA /* EmojiKeyBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971818741E82150C004E8DCA /* EmojiKeyBoardView.swift */; };
+		971818771E82162F004E8DCA /* emojiData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 971818761E82162F004E8DCA /* emojiData.plist */; };
+		971818791E8254AA004E8DCA /* EmojiButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971818781E8254AA004E8DCA /* EmojiButton.swift */; };
 		971B5AA91D62F1720073E5DC /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971B5AA81D62F1720073E5DC /* SettingTableViewController.swift */; };
 		971B5AAB1D62FF010073E5DC /* TextCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971B5AAA1D62FF010073E5DC /* TextCenterCell.swift */; };
 		971B5AAD1D6304350073E5DC /* ZXYActionSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971B5AAC1D6304350073E5DC /* ZXYActionSheetController.swift */; };
@@ -32,6 +36,8 @@
 		972C8B9D1D5C7A1800CD8A19 /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972C8B9A1D5C7A1800CD8A19 /* DiscoverTableViewController.swift */; };
 		972C8B9F1D5C7A7400CD8A19 /* CustomGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972C8B9E1D5C7A7400CD8A19 /* CustomGroupCell.swift */; };
 		972C8BA11D5C7BD100CD8A19 /* CustomGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972C8BA01D5C7BD100CD8A19 /* CustomGroupModel.swift */; };
+		973200FF1E7FC0C800066319 /* MsgExternItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973200FE1E7FC0C800066319 /* MsgExternItemView.swift */; };
+		9732F3A51E7FB4FD00066319 /* MsgExternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9732F3A41E7FB4FD00066319 /* MsgExternView.swift */; };
 		973D01711D6155390004BFB9 /* ContactUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D01701D6155390004BFB9 /* ContactUserCell.swift */; };
 		973D01731D6155C80004BFB9 /* UserContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D01721D6155C80004BFB9 /* UserContactModel.swift */; };
 		97A545921D5C03D200B440DF /* 2016_coin1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A53B2F1D5C03B500B440DF /* 2016_coin1@2x.png */; };
@@ -2728,10 +2734,14 @@
 		9704E0A01D61C05300ED3659 /* ImageInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageInfoCell.swift; sourceTree = "<group>"; };
 		9704E0A21D61C9B800ED3659 /* TextInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInfoModel.swift; sourceTree = "<group>"; };
 		9704E0A41D61CDD400ED3659 /* TextInfoNoArrowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInfoNoArrowCell.swift; sourceTree = "<group>"; };
+		970811EF1E81066D00878EEA /* msgExtern.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = msgExtern.plist; sourceTree = "<group>"; };
 		97099E0C1D5D60C300A7EEBA /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
 		97099E101D5D613C00A7EEBA /* UserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		97099E121D5D615200A7EEBA /* UserInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoCell.swift; sourceTree = "<group>"; };
 		97099E141D5D693000A7EEBA /* userinfoAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userinfoAvatar.png; sourceTree = "<group>"; };
+		971818741E82150C004E8DCA /* EmojiKeyBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiKeyBoardView.swift; sourceTree = "<group>"; };
+		971818761E82162F004E8DCA /* emojiData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emojiData.plist; sourceTree = "<group>"; };
+		971818781E8254AA004E8DCA /* EmojiButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiButton.swift; sourceTree = "<group>"; };
 		971B5AA81D62F1720073E5DC /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		971B5AAA1D62FF010073E5DC /* TextCenterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCenterCell.swift; sourceTree = "<group>"; };
 		971B5AAC1D6304350073E5DC /* ZXYActionSheetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZXYActionSheetController.swift; sourceTree = "<group>"; };
@@ -2745,6 +2755,8 @@
 		972C8B9A1D5C7A1800CD8A19 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		972C8B9E1D5C7A7400CD8A19 /* CustomGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGroupCell.swift; sourceTree = "<group>"; };
 		972C8BA01D5C7BD100CD8A19 /* CustomGroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGroupModel.swift; sourceTree = "<group>"; };
+		973200FE1E7FC0C800066319 /* MsgExternItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsgExternItemView.swift; sourceTree = "<group>"; };
+		9732F3A41E7FB4FD00066319 /* MsgExternView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsgExternView.swift; sourceTree = "<group>"; };
 		973D01701D6155390004BFB9 /* ContactUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUserCell.swift; sourceTree = "<group>"; };
 		973D01721D6155C80004BFB9 /* UserContactModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserContactModel.swift; sourceTree = "<group>"; };
 		97A53B2F1D5C03B500B440DF /* 2016_coin1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2016_coin1@2x.png"; sourceTree = "<group>"; };
@@ -5542,6 +5554,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		973200F91E7FBD2400066319 /* LocalData */ = {
+			isa = PBXGroup;
+			children = (
+				970811EF1E81066D00878EEA /* msgExtern.plist */,
+				971818761E82162F004E8DCA /* emojiData.plist */,
+			);
+			path = LocalData;
+			sourceTree = "<group>";
+		};
 		97A54FF51D5C0AB200B440DF /* FrameWorks */ = {
 			isa = PBXGroup;
 			children = (
@@ -5599,6 +5620,10 @@
 				97A550081D5C34A000B440DF /* MessageCell.swift */,
 				97FCF48F1D5DB4E100AFB2C1 /* MoreFuncCell.swift */,
 				972AAF581D66E1070092DE09 /* VoiceHudView.swift */,
+				9732F3A41E7FB4FD00066319 /* MsgExternView.swift */,
+				973200FE1E7FC0C800066319 /* MsgExternItemView.swift */,
+				971818741E82150C004E8DCA /* EmojiKeyBoardView.swift */,
+				971818781E8254AA004E8DCA /* EmojiButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5672,6 +5697,7 @@
 		97C79BCC1D5B013000877A83 /* WeChat */ = {
 			isa = PBXGroup;
 			children = (
+				973200F91E7FBD2400066319 /* LocalData */,
 				97A550041D5C34A000B440DF /* Controller */,
 				97A550061D5C34A000B440DF /* Model */,
 				97A550071D5C34A000B440DF /* View */,
@@ -8393,7 +8419,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = zhixueyun;
 				TargetAttributes = {
 					97C79BB11D5AF2DE00877A83 = {
@@ -8969,6 +8995,7 @@
 				97A54FC61D5C03D200B440DF /* wechatout_keypad@2x.png in Resources */,
 				97A547181D5C03D200B440DF /* barbuttonicon_Operate.png in Resources */,
 				97A54E5D1D5C03D200B440DF /* sight_icon_location_selected@2x.png in Resources */,
+				971818771E82162F004E8DCA /* emojiData.plist in Resources */,
 				97A54B801D5C03D200B440DF /* MoreMyFavorites@3x.png in Resources */,
 				97A54AC61D5C03D200B440DF /* LuckyMoney_WhiteBtn@2x.png in Resources */,
 				97A54EA81D5C03D200B440DF /* tenpay_del_normal@2x.png in Resources */,
@@ -9758,6 +9785,7 @@
 				97A54D2E1D5C03D200B440DF /* ReceiverTextNodeBkgHL@2x.png in Resources */,
 				97A54FE11D5C03D200B440DF /* whatsnew_point_circle@3x.png in Resources */,
 				97A545AA1D5C03D200B440DF /* 2016_LuckyMoney_BottomLogo@2x.png in Resources */,
+				970811F01E81066D00878EEA /* msgExtern.plist in Resources */,
 				97A5487E1D5C03D200B440DF /* EmoticonDownload_dissable_iconbg@3x.png in Resources */,
 				97A54AB41D5C03D200B440DF /* LuckyMoney_Enterprise_RoundBtn@2x.png in Resources */,
 				97A54C061D5C03D200B440DF /* MyShareCarPhotoDefaultImg@2x.png in Resources */,
@@ -11158,6 +11186,7 @@
 				972C8B9D1D5C7A1800CD8A19 /* DiscoverTableViewController.swift in Sources */,
 				97A5500A1D5C34A000B440DF /* MessageCell.swift in Sources */,
 				9704E09D1D61BE4500ED3659 /* AvatarCell.swift in Sources */,
+				9732F3A51E7FB4FD00066319 /* MsgExternView.swift in Sources */,
 				97A54FFE1D5C16E500B440DF /* ZXYViewController.swift in Sources */,
 				97099E0F1D5D60C300A7EEBA /* MyTableViewController.swift in Sources */,
 				97A54FFA1D5C0B8000B440DF /* GlobalTool.swift in Sources */,
@@ -11171,14 +11200,17 @@
 				9704E0A31D61C9B800ED3659 /* TextInfoModel.swift in Sources */,
 				97099E131D5D615200A7EEBA /* UserInfoCell.swift in Sources */,
 				97A550001D5C177E00B440DF /* ZXYTableViewController.swift in Sources */,
+				971818751E82150C004E8DCA /* EmojiKeyBoardView.swift in Sources */,
 				97FCF4901D5DB4E100AFB2C1 /* MoreFuncCell.swift in Sources */,
 				97FCF48A1D5D9ED500AFB2C1 /* GlobalImage.swift in Sources */,
 				972C8B8F1D5C536400CD8A19 /* messageModel.swift in Sources */,
 				972C8BA11D5C7BD100CD8A19 /* CustomGroupModel.swift in Sources */,
 				97B95C321D6557B4008EC51A /* WeChatViewController.swift in Sources */,
+				973200FF1E7FC0C800066319 /* MsgExternItemView.swift in Sources */,
 				97099E111D5D613C00A7EEBA /* UserInfoModel.swift in Sources */,
 				97C79BB61D5AF2DE00877A83 /* AppDelegate.swift in Sources */,
 				972AAF5B1D67024C0092DE09 /* WKeyBoardViewController.swift in Sources */,
+				971818791E8254AA004E8DCA /* EmojiButton.swift in Sources */,
 				972C8B941D5C751400CD8A19 /* ContactTableViewController.swift in Sources */,
 				97A550091D5C34A000B440DF /* WeChatTableViewController.swift in Sources */,
 				971B5AAF1D6319580073E5DC /* ZXYAlertAction.swift in Sources */,

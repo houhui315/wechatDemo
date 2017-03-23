@@ -8,13 +8,16 @@
 
 import UIKit
 
-class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate {
+class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,MsgExternViewDelegate {
 
     //录音显示背景
     var voiceControl: VoiceHudView?
     
     //键盘出现的时候显示的背景
     var bgControl: UIControl?
+    
+    var keyBoardViewController: WKeyBoardViewController? = nil
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +39,11 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate {
         
         let keyBoard = WKeyBoardViewController()
         keyBoard.delegate = self
+        keyBoard.externDelegate = self
         self.addChildViewController(keyBoard)
         self.view.addSubview(keyBoard.view)
-        keyBoard.view.frame = CGRect(x: 0, y: GlobalDevice.appFrameHeight - 50, width: GlobalDevice.screenWidth, height: 216 + 50)
+        self.keyBoardViewController = keyBoard
+        keyBoard.view.frame = CGRect(x: 0, y: GlobalDevice.appFrameHeight - 50, width: GlobalDevice.screenWidth, height: 216 + 50+300)
     }
     
     func initVoiceHudView() {
@@ -63,10 +68,7 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate {
         self.view.addSubview(bgControl!)
         bgControl?.snp.makeConstraints({ (make) in
             
-            make.left.equalTo(0)
-            make.right.equalTo(self.view.snp.right)
-            make.top.equalTo(self.view.snp.top)
-            make.bottom.equalTo(self.view.snp.bottom).offset(-50)
+            make.edges.equalToSuperview()
         })
         bgControl?.isHidden = true
     }
@@ -74,6 +76,7 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate {
     func bgControlTouch() {
         
         self.view.endEditing(true)
+        self.keyBoardViewController?.messagePageBackgroundTouch()
     }
     
     func weChatInfo() {
@@ -129,6 +132,54 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate {
     
     func WKeyBoardWillHide() {
         
+        let isShowExternBox = self.keyBoardViewController?.isShowEmojiBoxOrExternBox()
+        
+        if isShowExternBox! {
+            bgControl?.isHidden = true
+        }
+    }
+    
+    //MARK: -显示背景control
+    func showBackGroundControl(){
+    
+        bgControl?.isHidden = false
+    }
+    
+    func hideBackGroundControl(){
+        
         bgControl?.isHidden = true
     }
+    
+    
+    //MARK: -调用+功能
+    func sendPictureFromAlbum() {
+        
+        UIAlertView.init(title: nil, message: "图片", delegate: nil, cancelButtonTitle: "确定").show()
+    }
+    
+    func sendPictureFromCamera() {
+        UIAlertView.init(title: nil, message: "拍摄", delegate: nil, cancelButtonTitle: "确定").show()
+    }
+    func sendVoiceInfo() {
+        UIAlertView.init(title: nil, message: "视频聊天", delegate: nil, cancelButtonTitle: "确定").show()
+    }
+    func sendLocation() {
+        UIAlertView.init(title: nil, message: "位置", delegate: nil, cancelButtonTitle: "确定").show()
+    }
+    func sendLuckyMoney() {
+        UIAlertView.init(title: nil, message: "红包", delegate: nil, cancelButtonTitle: "确定").show()
+    }
+    func payMoney() {
+        UIAlertView.init(title: nil, message: "转账", delegate: nil, cancelButtonTitle: "确定").show()
+    }
+    func sendUserCard() {
+        UIAlertView.init(title: nil, message: "个人名片", delegate: nil, cancelButtonTitle: "确定").show()
+    }
+    func sendMyFavourite() {
+        UIAlertView.init(title: nil, message: "收藏", delegate: nil, cancelButtonTitle: "确定").show()
+    }
+    func sendMyWallert() {
+        UIAlertView.init(title: nil, message: "卡包", delegate: nil, cancelButtonTitle: "确定").show()
+    }
+    
 }

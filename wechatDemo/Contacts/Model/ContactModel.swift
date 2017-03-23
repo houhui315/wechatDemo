@@ -12,4 +12,10 @@ class ContactModel: NSObject {
 
     var imageName: String?
     var title: String?
+    
+    init(imageName:String, title:String) {
+        
+        self.imageName = imageName
+        self.title = title
+    }
 }
