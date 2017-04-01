@@ -36,3 +36,4 @@ class GlobalImage: NSObject {
         return GlobalImage.renderImageWithImageName(image).resizableImage(withCapInsets: edge)
     }
 }
+

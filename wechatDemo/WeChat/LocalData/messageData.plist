@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>senderAvatar</key>
+		<string>ruanpeng</string>
+		<key>senderIsMe</key>
+		<false/>
+		<key>messageType</key>
+		<string>text</string>
+		<key>content</key>
+		<string>Swift中枚举：是一种重新定义的类型：和所有的语言的功能类似</string>
+	</dict>
+	<dict>
+		<key>senderAvatar</key>
+		<string>yuxiao</string>
+		<key>senderIsMe</key>
+		<true/>
+		<key>messageType</key>
+		<string>text</string>
+		<key>content</key>
+		<string>作用：主要用于管理一组有限的值的集合</string>
+	</dict>
+	<dict>
+		<key>senderAvatar</key>
+		<string>ruanpeng</string>
+		<key>senderIsMe</key>
+		<false/>
+		<key>messageType</key>
+		<string>text</string>
+		<key>content</key>
+		<string>1.具有面向对象的特征</string>
+	</dict>
+	<dict>
+		<key>senderAvatar</key>
+		<string>yuxiao</string>
+		<key>senderIsMe</key>
+		<true/>
+		<key>messageType</key>
+		<string>text</string>
+		<key>content</key>
+		<string>2.支持计算属性</string>
+	</dict>
+	<dict>
+		<key>senderAvatar</key>
+		<string>ruanpeng</string>
+		<key>senderIsMe</key>
+		<false/>
+		<key>messageType</key>
+		<string>text</string>
+		<key>content</key>
+		<string>3.支持实例方法和类型方法</string>
+	</dict>
+	<dict>
+		<key>senderAvatar</key>
+		<string>yuxiao</string>
+		<key>senderIsMe</key>
+		<true/>
+		<key>messageType</key>
+		<string>text</string>
+		<key>content</key>
+		<string>4.允许枚举遵守指定协议来提供标准的功能</string>
+	</dict>
+</array>
+</plist>

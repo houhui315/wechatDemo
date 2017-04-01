@@ -43,6 +43,7 @@ class MsgExternView: UIView,UIScrollViewDelegate {
     override init(frame: CGRect){
         
         super.init(frame: frame)
+        self.backgroundColor = GlobalColor.bgColor
         self.initSubViews()
     }
     

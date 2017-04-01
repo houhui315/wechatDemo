@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,MsgExternViewDelegate {
+class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,MsgExternViewDelegate,UITableViewDelegate,UITableViewDataSource {
 
     //录音显示背景
     var voiceControl: VoiceHudView?
@@ -18,6 +18,9 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,Ms
     
     var keyBoardViewController: WKeyBoardViewController? = nil
     
+    var messageTableView: UITableView? = nil
+    
+    var messageDataAry: NSMutableArray? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +28,45 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,Ms
         self.view.backgroundColor = GlobalColor.bgColor
         
         self.initNavBar()
+        self.initMessageData()
+        self.initTabView()
         self.initBgControl()
         self.initKeyBoardTool()
+        
+    }
+    
+    func initMessageData() {
+        
+        let path = Bundle.main.path(forResource: "messageData", ofType: "plist")
+        let tAry = NSArray.init(contentsOfFile: path!)
+        self.messageDataAry = NSMutableArray.init()
+        for item in tAry! {
+            
+            let model = chatMessageModel.init()
+            model.setValuesForKeys(item as! [String : Any])
+            self.messageDataAry?.add(model)
+        }
+        
+    }
+    
+    func initTabView() {
+        
+        let rect = CGRect.init(x: 0, y: 0, width: GlobalDevice.screenWidth, height: GlobalDevice.appFrameHeight - 50)
+        let tableView = UITableView.init(frame: rect, style: .plain)
+        tableView.register(TextMessageCell.self, forCellReuseIdentifier: TextMessageCell.cellIdentifier)
+        tableView.tableFooterView = UIView.init()
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = GlobalColor.bgColor
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.view.addSubview(tableView)
+        self.messageTableView = tableView
     }
     
     func initNavBar() {
         
         self.title = "小伙伴"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_InfoSingle"), style: UIBarButtonItemStyle.plain, target: self, action:#selector(WeChatViewController.weChatInfo))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_InfoSingle"), style: UIBarButtonItemStyle.plain, target: self, action:#selector(self.weChatInfo))
     }
     
     func initKeyBoardTool() {
@@ -91,6 +125,31 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,Ms
         print("取消发送语音")
     }
     
+//    MARK: - UITableViewDelegate & UITableViewDataSource methods
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (self.messageDataAry?.count)!
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell: TextMessageCell = tableView .dequeueReusableCell(withIdentifier: TextMessageCell.cellIdentifier, for: indexPath) as! TextMessageCell
+        let model = self.messageDataAry?.object(at: indexPath.row) as! chatMessageModel
+        cell.configForBaseModel(model: model)
+        
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let model = self.messageDataAry?.object(at: indexPath.row) as! chatMessageModel
+        return TextMessageCell.heightForCell(theString: model.content!)
+    }
+    
 //    MARK: - WWKeyBoardViewControllerDelegate methods
     
     func WkeyBoardVoiceTouchDown() {
@@ -127,7 +186,9 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,Ms
     func WKeyBoardWillShow(_ keyBoardHeight: CGFloat) {
         
         bgControl?.isHidden = false
-        
+        let rect = CGRect.init(origin: (self.messageTableView?.frame.origin)!, size: CGSize.init(width: (self.messageTableView?.frame.size.width)!, height: GlobalDevice.appFrameHeight-50-216))
+        self.messageTableView?.frame = rect
+        self.messageTableView?.scrollToRow(at: IndexPath.init(item: (self.messageDataAry?.count)!-1, section: 0), at: .bottom, animated: true)
     }
     
     func WKeyBoardWillHide() {
@@ -137,6 +198,10 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,Ms
         if isShowExternBox! {
             bgControl?.isHidden = true
         }
+        
+        let rect = CGRect.init(origin: (self.messageTableView?.frame.origin)!, size: CGSize.init(width: (self.messageTableView?.frame.size.width)!, height: GlobalDevice.appFrameHeight-50))
+        self.messageTableView?.frame = rect
+        self.messageTableView?.scrollToRow(at: IndexPath.init(item: (self.messageDataAry?.count)!-1, section: 0), at: .bottom, animated: true)
     }
     
     //MARK: -显示背景control

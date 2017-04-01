@@ -40,6 +40,9 @@
 		9732F3A51E7FB4FD00066319 /* MsgExternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9732F3A41E7FB4FD00066319 /* MsgExternView.swift */; };
 		973D01711D6155390004BFB9 /* ContactUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D01701D6155390004BFB9 /* ContactUserCell.swift */; };
 		973D01731D6155C80004BFB9 /* UserContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D01721D6155C80004BFB9 /* UserContactModel.swift */; };
+		975265391E84BE4200FE7AFD /* messageData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 975265381E84BE4200FE7AFD /* messageData.plist */; };
+		9752653B1E84C34F00FE7AFD /* BaseMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9752653A1E84C34F00FE7AFD /* BaseMessageCell.swift */; };
+		9752653F1E84C9A500FE7AFD /* chatMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9752653E1E84C9A500FE7AFD /* chatMessageModel.swift */; };
 		97A545921D5C03D200B440DF /* 2016_coin1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A53B2F1D5C03B500B440DF /* 2016_coin1@2x.png */; };
 		97A545931D5C03D200B440DF /* 2016_coin2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A53B301D5C03B500B440DF /* 2016_coin2@2x.png */; };
 		97A545941D5C03D200B440DF /* 2016_coin3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A53B311D5C03B500B440DF /* 2016_coin3@2x.png */; };
@@ -2708,6 +2711,7 @@
 		97B95C321D6557B4008EC51A /* WeChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B95C311D6557B4008EC51A /* WeChatViewController.swift */; };
 		97C79BB61D5AF2DE00877A83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C79BB51D5AF2DE00877A83 /* AppDelegate.swift */; };
 		97C79BBD1D5AF2DE00877A83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C79BBC1D5AF2DE00877A83 /* Assets.xcassets */; };
+		97D8ABC01E8E517F008B0E07 /* TextMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D8ABBF1E8E517F008B0E07 /* TextMessageCell.swift */; };
 		97DAADF31D64534000A86878 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DAADF21D64534000A86878 /* LoginViewController.swift */; };
 		97FCF4841D5D9BBD00AFB2C1 /* GlobalFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FCF4831D5D9BBD00AFB2C1 /* GlobalFont.swift */; };
 		97FCF4861D5D9BDC00AFB2C1 /* GlobalColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FCF4851D5D9BDC00AFB2C1 /* GlobalColor.swift */; };
@@ -2759,6 +2763,9 @@
 		9732F3A41E7FB4FD00066319 /* MsgExternView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsgExternView.swift; sourceTree = "<group>"; };
 		973D01701D6155390004BFB9 /* ContactUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUserCell.swift; sourceTree = "<group>"; };
 		973D01721D6155C80004BFB9 /* UserContactModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserContactModel.swift; sourceTree = "<group>"; };
+		975265381E84BE4200FE7AFD /* messageData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = messageData.plist; sourceTree = "<group>"; };
+		9752653A1E84C34F00FE7AFD /* BaseMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMessageCell.swift; sourceTree = "<group>"; };
+		9752653E1E84C9A500FE7AFD /* chatMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatMessageModel.swift; sourceTree = "<group>"; };
 		97A53B2F1D5C03B500B440DF /* 2016_coin1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2016_coin1@2x.png"; sourceTree = "<group>"; };
 		97A53B301D5C03B500B440DF /* 2016_coin2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2016_coin2@2x.png"; sourceTree = "<group>"; };
 		97A53B311D5C03B500B440DF /* 2016_coin3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2016_coin3@2x.png"; sourceTree = "<group>"; };
@@ -5431,6 +5438,7 @@
 		97C79BB51D5AF2DE00877A83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97C79BBC1D5AF2DE00877A83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C79BC11D5AF2DE00877A83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97D8ABBF1E8E517F008B0E07 /* TextMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMessageCell.swift; sourceTree = "<group>"; };
 		97DAADF21D64534000A86878 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		97FCF4831D5D9BBD00AFB2C1 /* GlobalFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFont.swift; sourceTree = "<group>"; };
 		97FCF4851D5D9BDC00AFB2C1 /* GlobalColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalColor.swift; sourceTree = "<group>"; };
@@ -5559,6 +5567,7 @@
 			children = (
 				970811EF1E81066D00878EEA /* msgExtern.plist */,
 				971818761E82162F004E8DCA /* emojiData.plist */,
+				975265381E84BE4200FE7AFD /* messageData.plist */,
 			);
 			path = LocalData;
 			sourceTree = "<group>";
@@ -5609,6 +5618,7 @@
 			children = (
 				972C8B8E1D5C536400CD8A19 /* messageModel.swift */,
 				97FCF4911D5DB67000AFB2C1 /* MoreAddModel.swift */,
+				9752653E1E84C9A500FE7AFD /* chatMessageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5624,6 +5634,8 @@
 				973200FE1E7FC0C800066319 /* MsgExternItemView.swift */,
 				971818741E82150C004E8DCA /* EmojiKeyBoardView.swift */,
 				971818781E8254AA004E8DCA /* EmojiButton.swift */,
+				9752653A1E84C34F00FE7AFD /* BaseMessageCell.swift */,
+				97D8ABBF1E8E517F008B0E07 /* TextMessageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -10601,6 +10613,7 @@
 				97A54C0F1D5C03D200B440DF /* NewFriend_Google_icon@2x.png in Resources */,
 				97A549C71D5C03D200B440DF /* fileicon_zip90@2x.png in Resources */,
 				97A5469B1D5C03D200B440DF /* AlbumOperateMore@2x.png in Resources */,
+				975265391E84BE4200FE7AFD /* messageData.plist in Resources */,
 				97A54BE91D5C03D200B440DF /* MyCardPackageIcon_Used@2x.png in Resources */,
 				97A54A241D5C03D200B440DF /* GreenBigBtnHighlight@2x.png in Resources */,
 				97A5486C1D5C03D200B440DF /* earpieceMode@3x.png in Resources */,
@@ -11178,6 +11191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9752653B1E84C34F00FE7AFD /* BaseMessageCell.swift in Sources */,
 				97FCF4921D5DB67000AFB2C1 /* MoreAddModel.swift in Sources */,
 				972AAF591D66E1070092DE09 /* VoiceHudView.swift in Sources */,
 				9704E0A11D61C05300ED3659 /* ImageInfoCell.swift in Sources */,
@@ -11201,6 +11215,7 @@
 				97099E131D5D615200A7EEBA /* UserInfoCell.swift in Sources */,
 				97A550001D5C177E00B440DF /* ZXYTableViewController.swift in Sources */,
 				971818751E82150C004E8DCA /* EmojiKeyBoardView.swift in Sources */,
+				9752653F1E84C9A500FE7AFD /* chatMessageModel.swift in Sources */,
 				97FCF4901D5DB4E100AFB2C1 /* MoreFuncCell.swift in Sources */,
 				97FCF48A1D5D9ED500AFB2C1 /* GlobalImage.swift in Sources */,
 				972C8B8F1D5C536400CD8A19 /* messageModel.swift in Sources */,
@@ -11218,6 +11233,7 @@
 				971B5AAB1D62FF010073E5DC /* TextCenterCell.swift in Sources */,
 				97FCF48E1D5DA3EB00AFB2C1 /* MoreAddView.swift in Sources */,
 				97DAADF31D64534000A86878 /* LoginViewController.swift in Sources */,
+				97D8ABC01E8E517F008B0E07 /* TextMessageCell.swift in Sources */,
 				971B5AA91D62F1720073E5DC /* SettingTableViewController.swift in Sources */,
 				9704E0991D61A68B00ED3659 /* CContactHeadView.swift in Sources */,
 				972C8B981D5C758000CD8A19 /* ContactCell.swift in Sources */,

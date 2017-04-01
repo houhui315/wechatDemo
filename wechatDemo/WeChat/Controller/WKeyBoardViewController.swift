@@ -366,9 +366,6 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             })
             
             break
-        default:
-            
-            break
         }
         
     }
@@ -514,8 +511,6 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             })
             
             break
-        default:
-            break
         }
         
         
@@ -616,9 +611,19 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
         }
         
         
-        var rect = self.view.frame
-        rect.origin.y = GlobalDevice.appFrameHeight-myheight-216
-        self.view.frame = rect
+        if self.keyBoxType == .EmojiBox {
+            
+            self.myEmojiView?.frame = CGRect.init(x: 0, y: myheight, width: GlobalDevice.screenWidth, height: self.emojiBoxHeight)
+            
+            var rect = self.view.frame
+            rect.origin.y = GlobalDevice.appFrameHeight-myheight-self.emojiBoxHeight
+            self.view.frame = rect
+        }else{
+            var rect = self.view.frame
+            rect.origin.y = GlobalDevice.appFrameHeight-myheight-216
+            self.view.frame = rect
+        }
+        
     }
     
     //Mark: - EmojiKeyBoardViewDelegate methods
