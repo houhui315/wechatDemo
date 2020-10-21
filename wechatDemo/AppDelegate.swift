@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         item.selectedImage = GlobalImage.renderImageWithImageName(selectedImageString)
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         window = UIWindow.init(frame: GlobalDevice.screenBounds)
@@ -35,22 +35,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func initHomeViewController() {
+    @objc func initHomeViewController() {
         
-        let wechatViewController = WeChatTableViewController(style: UITableViewStyle.plain)
+        let wechatViewController = WeChatTableViewController(style: UITableView.Style.plain)
         wechatViewController.title = "微信"
         
         let nav1 = ZXYNavigationController.init(rootViewController: wechatViewController)
         
-        let contactsViewController = ContactTableViewController(style: UITableViewStyle.plain)
+        let contactsViewController = ContactTableViewController(style: UITableView.Style.plain)
         contactsViewController.title = "通讯录"
         let nav2 = ZXYNavigationController.init(rootViewController: contactsViewController)
         
-        let discoverViewController = DiscoverTableViewController(style: UITableViewStyle.grouped)
+        let discoverViewController = DiscoverTableViewController(style: UITableView.Style.grouped)
         discoverViewController.title = "发现"
         let nav3 = ZXYNavigationController.init(rootViewController: discoverViewController)
         
-        let myViewController = MyTableViewController(style: UITableViewStyle.grouped)
+        let myViewController = MyTableViewController(style: UITableView.Style.grouped)
         myViewController.title = "我"
         let nav4 = ZXYNavigationController.init(rootViewController: myViewController)
         
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = tabbarController
     }
     
-    func initLoginViewController() {
+    @objc func initLoginViewController() {
         
         let loginVC = LoginViewController()
         window!.rootViewController = loginVC

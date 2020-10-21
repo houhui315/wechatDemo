@@ -23,7 +23,7 @@ class LoginViewController: ZXYViewController {
         self.view.addSubview(loginView)
         loginView.snp.makeConstraints { (make) in
             
-            make.edges.equalTo(UIEdgeInsetsMake(GlobalDevice.navStatusBarHeight, 0, 0, 0))
+            make.edges.equalTo(UIEdgeInsets(top: GlobalDevice.navStatusBarHeight, left: 0, bottom: 0, right: 0))
         }
         
         let avatarImageView = UIImageView.init()
@@ -89,9 +89,9 @@ class LoginViewController: ZXYViewController {
         }
         
         let button = UIButton.init()
-        button.setBackgroundImage(GlobalImage.resizeImageWithEdge(image: "LoginGreenBigBtn", edge: UIEdgeInsetsMake(0, 15, 0, 15)), for: UIControlState())
-        button.setTitle("登录", for: UIControlState())
-        button.addTarget(self, action: #selector(LoginViewController.loginAction), for: UIControlEvents.touchUpInside)
+        button.setBackgroundImage(GlobalImage.resizeImageWithEdge(image: "LoginGreenBigBtn", edge: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)), for: UIControl.State.normal)
+        button.setTitle("登录", for: UIControl.State.normal)
+        button.addTarget(self, action: #selector(LoginViewController.loginAction), for: UIControl.Event.touchUpInside)
         loginView.addSubview(button)
         button.snp.makeConstraints { (make) in
             
@@ -102,8 +102,8 @@ class LoginViewController: ZXYViewController {
         }
         
         let questionButton = UIButton.init()
-        questionButton.setTitle("登录遇到问题?", for: UIControlState())
-        questionButton.setTitleColor(GlobalColor.RGB(r: 107, g: 125, b: 158), for: UIControlState())
+        questionButton.setTitle("登录遇到问题?", for: UIControl.State.normal)
+        questionButton.setTitleColor(GlobalColor.RGB(r: 107, g: 125, b: 158), for: UIControl.State.normal)
         questionButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         loginView.addSubview(questionButton)
         questionButton.snp.makeConstraints { (make) in
@@ -115,10 +115,10 @@ class LoginViewController: ZXYViewController {
         }
         
         let moreButton = UIButton.init()
-        moreButton.setTitle("更多", for: UIControlState())
-        moreButton.setTitleColor(GlobalColor.RGB(r: 107, g: 125, b: 158), for: UIControlState())
+        moreButton.setTitle("更多", for: UIControl.State.normal)
+        moreButton.setTitleColor(GlobalColor.RGB(r: 107, g: 125, b: 158), for: UIControl.State.normal)
         moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        moreButton.addTarget(self, action: #selector(LoginViewController.moreButtonTouch), for: UIControlEvents.touchUpInside)
+        moreButton.addTarget(self, action: #selector(LoginViewController.moreButtonTouch), for: UIControl.Event.touchUpInside)
         loginView.addSubview(moreButton)
         moreButton.snp.makeConstraints { (make) in
             
@@ -129,12 +129,12 @@ class LoginViewController: ZXYViewController {
         }
     }
     
-    func loginAction() {
+    @objc func loginAction() {
         
         NotificationCenter.default.post(Notification.init(name: Notification.Name(rawValue: "LoginSuccess"), object: nil))
     }
     
-    func moreButtonTouch() {
+    @objc func moreButtonTouch() {
         
         let actionController = ZXYActionSheetController.init(message: nil)
         actionController.addAction(ZXYAlertAction.init(title: "切换帐号...", style: ZXYAlertActionStyle.default, handle: { (action:ZXYAlertAction) in

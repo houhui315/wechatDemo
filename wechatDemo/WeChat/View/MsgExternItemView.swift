@@ -32,7 +32,7 @@ class MsgExternItemView: UIView {
         myIndex = idx
         
         let bgButton = UIButton.init()
-        bgButton.setBackgroundImage(UIImage.init(named: "sharemore_other"), for: UIControlState.normal)
+        bgButton.setBackgroundImage(UIImage.init(named: "sharemore_other"), for: UIControl.State.normal)
         self.addSubview(bgButton)
         self.mybgButton = bgButton
         bgButton.snp.makeConstraints { (make) in
@@ -45,7 +45,7 @@ class MsgExternItemView: UIView {
         bgButton.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { (make) in
             
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
         
         let titleLabel = UILabel.init()

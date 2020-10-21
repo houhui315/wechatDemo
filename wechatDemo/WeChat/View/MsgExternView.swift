@@ -69,7 +69,7 @@ class MsgExternView: UIView,UIScrollViewDelegate {
         
         let pageControl = UIPageControl.init()
         pageControl.numberOfPages = 2
-        pageControl.addTarget(self, action: #selector(self.pageControlValueChanged(pageControl:)), for: UIControlEvents.valueChanged)
+        pageControl.addTarget(self, action: #selector(self.pageControlValueChanged(pageControl:)), for: UIControl.Event.valueChanged)
         self.addSubview(pageControl)
         self.myPageControl = pageControl
         pageControl.snp.makeConstraints { (make) in
@@ -117,7 +117,7 @@ class MsgExternView: UIView,UIScrollViewDelegate {
             
             let itemView = MsgExternItemView.init(frame: frame, title: title, img: img, idx: index)
             self.myScrollView.addSubview(itemView)
-            itemView.mybgButton?.addTarget(self, action: #selector(MsgExternView.myButtonTouch(button:)), for: UIControlEvents.touchUpInside)
+            itemView.mybgButton?.addTarget(self, action: #selector(MsgExternView.myButtonTouch(button:)), for: UIControl.Event.touchUpInside)
         }
         
         
@@ -125,7 +125,7 @@ class MsgExternView: UIView,UIScrollViewDelegate {
         
     }
     
-    func myButtonTouch(button: UIButton) {
+    @objc func myButtonTouch(button: UIButton) {
         
         let itemView = button.superview as! MsgExternItemView
         let index = itemView.myIndex
@@ -145,7 +145,7 @@ class MsgExternView: UIView,UIScrollViewDelegate {
         }
     }
     
-    func pageControlValueChanged(pageControl: UIPageControl){
+    @objc func pageControlValueChanged(pageControl: UIPageControl){
         
         let x = GlobalDevice.screenWidth * CGFloat(pageControl.currentPage)
         self.myScrollView.setContentOffset(CGPoint.init(x: x, y: 0), animated: true)

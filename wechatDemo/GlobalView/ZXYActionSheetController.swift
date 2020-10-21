@@ -62,7 +62,7 @@ class ZXYActionSheetController: UIViewController {
         self.view.addSubview(control)
         control.backgroundColor = UIColor.black
         control.alpha = 0
-        control.addTarget(self, action: #selector(ZXYActionSheetController.controlTouch), for: UIControlEvents.touchUpInside)
+        control.addTarget(self, action: #selector(ZXYActionSheetController.controlTouch), for: UIControl.Event.touchUpInside)
         UIView.animate(withDuration: animateTime, animations: {
             self.control.alpha = 0.5
         }) 
@@ -79,7 +79,7 @@ class ZXYActionSheetController: UIViewController {
         
         if isHaveTitle {
             
-            let attributes = [NSFontAttributeName:UIFont.systemFont(ofSize: 14)]
+            let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 14)]
             let string = NSString(cString: titleString!, encoding: String.Encoding.utf8.rawValue)
             let rectOfTitle: CGRect = (string?.boundingRect(with: CGSize(width: GlobalDevice.screenWidth - 40, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes, context: nil))! as CGRect
             heightOfTitle = rectOfTitle.size.height + 40
@@ -121,23 +121,23 @@ class ZXYActionSheetController: UIViewController {
                 bottomView.addSubview(line)
             }
             
-            let button = UIButton.init(type: UIButtonType.custom)
+            let button = UIButton.init(type: UIButton.ButtonType.custom)
             button.frame = CGRect(x: 0, y: line.frame.maxY, width: GlobalDevice.screenWidth, height: heightOfActionButton)
             bottomView.addSubview(button)
-            button.addTarget(self, action: #selector(ZXYActionSheetController.buttonTouch(_:)), for: UIControlEvents.touchUpInside)
+            button.addTarget(self, action: #selector(ZXYActionSheetController.buttonTouch(_:)), for: UIControl.Event.touchUpInside)
             button.tag = 10 + index
             let action = actionList[index]
-            button.setTitle(action._title, for: UIControlState())
-            button.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 247, g: 247, b: 247), size: CGSize(width: 10, height: 10)), for: UIControlState.highlighted)
+            button.setTitle(action._title, for: UIControl.State.normal)
+            button.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 247, g: 247, b: 247), size: CGSize(width: 10, height: 10)), for: UIControl.State.highlighted)
             
             if action._stype == ZXYAlertActionStyle.destructive {
-                button.setTitleColor(GlobalColor.RGB(r: 233, g: 83, b: 78), for: UIControlState())
+                button.setTitleColor(GlobalColor.RGB(r: 233, g: 83, b: 78), for: UIControl.State.normal)
             }else if action._stype == ZXYAlertActionStyle.cancel{
-                button.setTitleColor(UIColor.black, for: UIControlState())
+                button.setTitleColor(UIColor.black, for: UIControl.State.normal)
             }else if action._stype == ZXYAlertActionStyle.default{
-                button.setTitleColor(UIColor.black, for: UIControlState())
+                button.setTitleColor(UIColor.black, for: UIControl.State.normal)
             }else{
-                button.setTitleColor(UIColor.black, for: UIControlState())
+                button.setTitleColor(UIColor.black, for: UIControl.State.normal)
             }
         }
         
@@ -152,7 +152,7 @@ class ZXYActionSheetController: UIViewController {
         }) 
     }
     
-    func buttonTouch(_ btn: UIButton) {
+    @objc func buttonTouch(_ btn: UIButton) {
         
         let action = actionList[btn.tag - 10]
         action._handle!(action)
@@ -199,7 +199,7 @@ class ZXYActionSheetController: UIViewController {
         }) 
     }
     
-    func controlTouch() {
+    @objc func controlTouch() {
         
         self.disMissAndRemoveSubViews { 
             self.dismiss(animated: false, completion: nil)

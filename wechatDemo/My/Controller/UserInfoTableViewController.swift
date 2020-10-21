@@ -11,8 +11,8 @@ import UIKit
 class UserInfoTableViewController: ZXYTableViewController {
 
     
-    override init(style: UITableViewStyle) {
-        super.init(style: UITableViewStyle.grouped)
+    override init(style: UITableView.Style) {
+        super.init(style: UITableView.Style.grouped)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -16,7 +16,7 @@ class MoreFuncCell: UITableViewCell {
     var iconImageView: UIImageView!
     var titleLabel: UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.initSubViews()
@@ -51,7 +51,7 @@ class MoreFuncCell: UITableViewCell {
             make.height.equalTo(20)
         }
         
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.selectionStyle = UITableViewCell.SelectionStyle.none
         
         self.backgroundColor = UIColor.clear
         self.backgroundView = nil

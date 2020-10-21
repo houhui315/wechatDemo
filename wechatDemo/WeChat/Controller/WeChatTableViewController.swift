@@ -30,12 +30,12 @@ class WeChatTableViewController: ZXYTableViewController , MoreAddViewDelegate{
         self.testData()
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(forName: NSNotification.Name.AVAudioSessionRouteChange, object: nil, queue: OperationQueue.main) { (notification: Notification) in
+        notificationCenter.addObserver(forName: AVAudioSession.routeChangeNotification, object: nil, queue: OperationQueue.main) { (notification: Notification) in
             
             let dic = (notification as NSNotification).userInfo
             let changeReason = (dic![AVAudioSessionRouteChangeReasonKey] as AnyObject).uintValue
             
-            if AVAudioSessionRouteChangeReason.init(rawValue: changeReason!) == AVAudioSessionRouteChangeReason.oldDeviceUnavailable{
+            if AVAudioSession.RouteChangeReason.init(rawValue: changeReason!) == AVAudioSession.RouteChangeReason.oldDeviceUnavailable{
                 
                 let routeDescription = dic![AVAudioSessionRouteChangePreviousRouteKey]
                 let outPuts : [AVAssetReaderOutput] = ((routeDescription as AnyObject).outputs)!
@@ -47,11 +47,11 @@ class WeChatTableViewController: ZXYTableViewController , MoreAddViewDelegate{
     
     func initBarButtonItem() {
         
-        let barButton = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_add")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(WeChatTableViewController.addButtonTouch))
+        let barButton = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_add")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), style: UIBarButtonItem.Style.plain, target: self, action: #selector(WeChatTableViewController.addButtonTouch))
         self.navigationItem.rightBarButtonItem = barButton
     }
     
-    func addButtonTouch() {
+    @objc func addButtonTouch() {
         
         if myMoreAddView?.superview != nil {
             

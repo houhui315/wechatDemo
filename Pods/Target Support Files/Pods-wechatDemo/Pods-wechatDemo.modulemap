@@ -1,4 +1,4 @@
-framework module Pods_wechatDemo {
+module Pods_wechatDemo {
   umbrella header "Pods-wechatDemo-umbrella.h"
 
   export *

@@ -33,11 +33,11 @@ class ContactTableViewController: ZXYTableViewController {
 
     func initBarButtonItem() {
         
-        let barButton = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_add_cube")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(WeChatTableViewController.addButtonTouch))
+        let barButton = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_add_cube")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), style: UIBarButtonItem.Style.plain, target: self, action: #selector(ContactTableViewController.addButtonTouch))
         self.navigationItem.rightBarButtonItem = barButton
     }
     
-    func addButtonTouch() {
+    @objc func addButtonTouch() {
         
         print("111")
     }
@@ -207,14 +207,12 @@ class ContactTableViewController: ZXYTableViewController {
         
         return ary
     }
-    
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if (indexPath as NSIndexPath).section == 0 {
             
-            return UITableViewCellEditingStyle.none
+            return UITableViewCell.EditingStyle.none
         }
-        return UITableViewCellEditingStyle.delete
+        return UITableViewCell.EditingStyle.delete
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -223,7 +221,7 @@ class ContactTableViewController: ZXYTableViewController {
             return nil
         }else{
             
-            let remarkAction = UITableViewRowAction.init(style: UITableViewRowActionStyle.normal, title: "备注") { (rowAction: UITableViewRowAction, indexPath: IndexPath) in
+            let remarkAction = UITableViewRowAction.init(style: UITableViewRowAction.Style.normal, title: "备注") { (rowAction: UITableViewRowAction, indexPath: IndexPath) in
                 
                 var list = [IndexPath]()
                 list.append(indexPath)

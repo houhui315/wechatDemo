@@ -62,7 +62,7 @@ class EmojiKeyBoardView: UIView,UIScrollViewDelegate {
         }
         
         let pageControl = UIPageControl.init()
-        pageControl.addTarget(self, action: #selector(EmojiKeyBoardView.pageControlValueChanged(pageControl:)), for: UIControlEvents.valueChanged)
+        pageControl.addTarget(self, action: #selector(EmojiKeyBoardView.pageControlValueChanged(pageControl:)), for: UIControl.Event.valueChanged)
         self.addSubview(pageControl)
         self.myPageControl = pageControl
         pageControl.snp.makeConstraints { (make) in
@@ -72,9 +72,9 @@ class EmojiKeyBoardView: UIView,UIScrollViewDelegate {
             make.left.right.equalToSuperview()
         }
         
-        let deleteEmojiBtn = UIButton.init(type: UIButtonType.custom)
-        deleteEmojiBtn.setImage(UIImage.init(named: "DeleteEmoticonBtn"), for: UIControlState.normal)
-        deleteEmojiBtn.addTarget(self, action: #selector(self.deleteEmojiButtonTouch), for: UIControlEvents.touchUpInside)
+        let deleteEmojiBtn = UIButton.init(type: UIButton.ButtonType.custom)
+        deleteEmojiBtn.setImage(UIImage.init(named: "DeleteEmoticonBtn"), for: UIControl.State.normal)
+        deleteEmojiBtn.addTarget(self, action: #selector(self.deleteEmojiButtonTouch), for: UIControl.Event.touchUpInside)
         self.addSubview(deleteEmojiBtn)
         deleteEmojiBtn.snp.makeConstraints { (make) in
             
@@ -140,14 +140,14 @@ class EmojiKeyBoardView: UIView,UIScrollViewDelegate {
             let itemView = EmojiButton.init(frame: frame, image: img, name: name, index: index)
             
             self.myScrollView.addSubview(itemView)
-            itemView.addTarget(self, action: #selector(EmojiKeyBoardView.myButtonTouch(button:)), for: UIControlEvents.touchUpInside)
+            itemView.addTarget(self, action: #selector(EmojiKeyBoardView.myButtonTouch(button:)), for: UIControl.Event.touchUpInside)
         }
         
         self.myPageControl.numberOfPages = pageCount
         self.myScrollView.contentSize = CGSize.init(width: GlobalDevice.screenWidth*CGFloat(self.myPageControl.numberOfPages), height: 0)
     }
     
-    func myButtonTouch(button: EmojiButton) {
+    @objc func myButtonTouch(button: EmojiButton) {
         
         if (self.delegate != nil) {
             
@@ -155,7 +155,7 @@ class EmojiKeyBoardView: UIView,UIScrollViewDelegate {
         }
     }
     
-    func deleteEmojiButtonTouch() {
+    @objc func deleteEmojiButtonTouch() {
         
         if (self.delegate != nil) {
             
@@ -163,7 +163,7 @@ class EmojiKeyBoardView: UIView,UIScrollViewDelegate {
         }
     }
     
-    func pageControlValueChanged(pageControl: UIPageControl){
+    @objc func pageControlValueChanged(pageControl: UIPageControl){
         
         let x = GlobalDevice.screenWidth * CGFloat(pageControl.currentPage)
         self.myScrollView.setContentOffset(CGPoint.init(x: x, y: 0), animated: true)

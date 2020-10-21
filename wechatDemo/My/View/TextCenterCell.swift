@@ -16,7 +16,7 @@ class TextCenterCell: UITableViewCell {
     //标题
     var titleLabel: UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.initSubViews()
@@ -37,7 +37,7 @@ class TextCenterCell: UITableViewCell {
         self.contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
     }
     

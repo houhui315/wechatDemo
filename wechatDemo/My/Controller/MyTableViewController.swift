@@ -64,14 +64,14 @@ class MyTableViewController: ZXYTableViewController {
     
     func gotoMyInfo() {
         
-        let userInfoVC = UserInfoTableViewController.init(style: UITableViewStyle.grouped)
+        let userInfoVC = UserInfoTableViewController.init(style: UITableView.Style.grouped)
         userInfoVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(userInfoVC, animated: true)
     }
     
     func gotoSetting() {
         
-        let userInfoVC = SettingTableViewController.init(style: UITableViewStyle.grouped)
+        let userInfoVC = SettingTableViewController.init(style: UITableView.Style.grouped)
         userInfoVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(userInfoVC, animated: true)
     }

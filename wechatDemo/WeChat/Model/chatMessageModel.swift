@@ -10,8 +10,8 @@ import UIKit
 
 class chatMessageModel: NSObject {
     
-    var senderAvatar: String? = nil
-    var senderIsMe: Bool = false
-    var messageType: String? = nil
-    var content: String? = nil
+    @objc var senderAvatar: String? = nil
+    @objc var senderIsMe: Bool = false
+    @objc var messageType: String? = nil
+    @objc var content: String? = nil
 }

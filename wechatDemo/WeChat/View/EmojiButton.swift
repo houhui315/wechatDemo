@@ -24,7 +24,7 @@ class EmojiButton: UIButton {
         
         super.init(frame: frame)
         self.myName = name
-        self.setImage(UIImage.init(named: image), for: UIControlState.normal)
+        self.setImage(UIImage.init(named: image), for: UIControl.State.normal)
     }
     
     required init?(coder aDecoder: NSCoder) {

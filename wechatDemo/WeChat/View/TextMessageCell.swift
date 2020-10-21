@@ -23,7 +23,7 @@ class TextMessageCell: BaseMessageCell {
     var myTextLabel: UILabel? = nil
     var backGroundImageView: UIImageView? = nil
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
@@ -83,7 +83,7 @@ class TextMessageCell: BaseMessageCell {
             make.bottom.equalTo(textlabel).offset(15)
         }
         
-        self.contentView.bringSubview(toFront: textlabel)
+        self.contentView.bringSubviewToFront(textlabel)
     }
     
     func compomentTextSize(theString: String) -> CGSize {

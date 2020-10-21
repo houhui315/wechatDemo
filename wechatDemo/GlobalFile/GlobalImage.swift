@@ -28,7 +28,7 @@ class GlobalImage: NSObject {
     
     internal class func renderImageWithImageName(_ image: String) -> UIImage {
         
-        return (UIImage.init(named: image)?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))!
+        return (UIImage.init(named: image)?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal))!
     }
     
     internal class func resizeImageWithEdge(image:String, edge:UIEdgeInsets) -> UIImage {

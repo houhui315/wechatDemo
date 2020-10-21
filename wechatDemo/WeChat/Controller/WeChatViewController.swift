@@ -43,7 +43,7 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,Ms
         for item in tAry! {
             
             let model = chatMessageModel.init()
-            model.setValuesForKeys(item as! [String : Any])
+            model.setValuesForKeys(item as! Dictionary<String, Any>)
             self.messageDataAry?.add(model)
         }
         
@@ -66,7 +66,7 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,Ms
     func initNavBar() {
         
         self.title = "小伙伴"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_InfoSingle"), style: UIBarButtonItemStyle.plain, target: self, action:#selector(self.weChatInfo))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "barbuttonicon_InfoSingle"), style: UIBarButtonItem.Style.plain, target: self, action:#selector(self.weChatInfo))
     }
     
     func initKeyBoardTool() {
@@ -74,7 +74,7 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,Ms
         let keyBoard = WKeyBoardViewController()
         keyBoard.delegate = self
         keyBoard.externDelegate = self
-        self.addChildViewController(keyBoard)
+        self.addChild(keyBoard)
         self.view.addSubview(keyBoard.view)
         self.keyBoardViewController = keyBoard
         keyBoard.view.frame = CGRect(x: 0, y: GlobalDevice.appFrameHeight - 50, width: GlobalDevice.screenWidth, height: 216 + 50+300)
@@ -98,7 +98,7 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,Ms
     func initBgControl() {
         
         bgControl = UIControl.init()
-        bgControl?.addTarget(self, action: #selector(WeChatViewController.bgControlTouch), for: UIControlEvents.touchUpInside)
+        bgControl?.addTarget(self, action: #selector(WeChatViewController.bgControlTouch), for: UIControl.Event.touchUpInside)
         self.view.addSubview(bgControl!)
         bgControl?.snp.makeConstraints({ (make) in
             
@@ -107,13 +107,13 @@ class WeChatViewController: ZXYViewController,WKeyBoardViewControllerDelegate,Ms
         bgControl?.isHidden = true
     }
 
-    func bgControlTouch() {
+    @objc func bgControlTouch() {
         
         self.view.endEditing(true)
         self.keyBoardViewController?.messagePageBackgroundTouch()
     }
     
-    func weChatInfo() {
+    @objc func weChatInfo() {
         
     }
     

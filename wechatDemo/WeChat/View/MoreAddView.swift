@@ -66,7 +66,7 @@ class MoreAddView: UIView ,UITableViewDelegate,UITableViewDataSource{
     func initBgControl(_ frame: CGRect) {
         
         control = UIControl.init(frame: frame)
-        control.addTarget(self, action: #selector(MoreAddView.controlTouch), for: UIControlEvents.touchUpInside)
+        control.addTarget(self, action: #selector(MoreAddView.controlTouch), for: UIControl.Event.touchUpInside)
         self.addSubview(control)
     }
     
@@ -83,7 +83,7 @@ class MoreAddView: UIView ,UITableViewDelegate,UITableViewDataSource{
             make.height.equalTo(193)
         }
         
-        let bgImageView = UIImageView.init(image: UIImage.init(named: "MoreFunctionFrame")?.resizableImage(withCapInsets: UIEdgeInsetsMake(15, 10, 10, 40)))
+        let bgImageView = UIImageView.init(image: UIImage.init(named: "MoreFunctionFrame")?.resizableImage(withCapInsets: UIEdgeInsets(top: 15, left: 10, bottom: 10, right: 40)))
         moreFunctionView.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { (make) in
             
@@ -93,7 +93,7 @@ class MoreAddView: UIView ,UITableViewDelegate,UITableViewDataSource{
             make.bottom.equalTo(moreFunctionView.snp.bottom)
         }
         
-        let tableView = UITableView.init(frame: CGRect(x: 10, y: 10, width: 140, height: 180), style: UITableViewStyle.plain)
+        let tableView = UITableView.init(frame: CGRect(x: 10, y: 10, width: 140, height: 180), style: UITableView.Style.plain)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MoreFuncCell.classForCoder(), forCellReuseIdentifier: MoreFuncCell.cellIdentifier)
@@ -101,7 +101,7 @@ class MoreAddView: UIView ,UITableViewDelegate,UITableViewDataSource{
         tableView.backgroundView = nil;
         tableView.backgroundColor = UIColor.clear
         tableView.separatorColor = GlobalColor.RGB(r: 89, g: 88, b: 90)
-        tableView.separatorInset = UIEdgeInsetsMake(43.5, 10, 0, 10)
+        tableView.separatorInset = UIEdgeInsets(top: 43.5, left: 10, bottom: 0, right: 10)
         moreFunctionView.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             
@@ -112,7 +112,7 @@ class MoreAddView: UIView ,UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    func controlTouch() {
+    @objc func controlTouch() {
         
         self.removeMyself()
         

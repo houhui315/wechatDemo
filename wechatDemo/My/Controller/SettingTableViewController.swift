@@ -59,7 +59,7 @@ class SettingTableViewController: ZXYTableViewController {
     
     func gotoMyInfo() {
         
-        let userInfoVC = UserInfoTableViewController.init(style: UITableViewStyle.grouped)
+        let userInfoVC = UserInfoTableViewController.init(style: UITableView.Style.grouped)
         userInfoVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(userInfoVC, animated: true)
     }

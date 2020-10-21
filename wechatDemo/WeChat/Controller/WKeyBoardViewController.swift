@@ -87,12 +87,11 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
         
         let notificationCenter = NotificationCenter.default
         let mainQueue = OperationQueue.main
-        notificationCenter.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: mainQueue) { (notification: Notification) in
-            
+        notificationCenter.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: mainQueue) { (notification: Notification) in
             self.keyBoardWillShowOrWillHide(notification)
         }
         
-        notificationCenter.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: mainQueue) { (notification: Notification) in
+        notificationCenter.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: mainQueue) { (notification: Notification) in
             
             self.keyBoardWillShowOrWillHide(notification)
         }
@@ -101,21 +100,21 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
     func removeKeyBoardObserver() {
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func keyBoardWillShowOrWillHide(_ notification: Notification) {
         
         let userInfo = (notification as NSNotification).userInfo
-        let keyboardFrame = (userInfo![UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+        let keyboardFrame = (userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
         
         var keyboardHeight = keyboardFrame?.height
         
-        let animationDutation = (userInfo![UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
-        let animationCurve = (userInfo![UIKeyboardAnimationCurveUserInfoKey] as AnyObject).uint32Value
+        let animationDutation = (userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        let animationCurve = (userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as AnyObject).uint32Value
         var isShowNotification: Bool = false
-        if notification.name == NSNotification.Name.UIKeyboardWillShow {
+        if notification.name == UIResponder.keyboardWillShowNotification {
             
             isShowNotification = true
         }
@@ -125,7 +124,7 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
         var rect = self.view.frame
         rect.origin.y = GlobalDevice.appFrameHeight-_keyBoadToolView.bounds.height-keyboardHeight!
         
-        UIView.animate(withDuration: animationDutation!, delay: 0, options: UIViewAnimationOptions(rawValue: UInt(Int(animationCurve!))), animations: {
+        UIView.animate(withDuration: animationDutation!, delay: 0, options: UIView.AnimationOptions(rawValue: UInt(Int(animationCurve!))), animations: {
             
             self.view.frame = rect
             
@@ -161,11 +160,11 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             make.height.equalTo(keyBoardToolHeight)
         }
         
-        let voiceButton = UIButton.init(type: UIButtonType.custom)
-        voiceButton.setImage(UIImage.init(named: "ToolViewInputVoice"), for: UIControlState())
-        voiceButton.setImage(UIImage.init(named: "ToolViewInputVoiceHL"), for: UIControlState.highlighted)
+        let voiceButton = UIButton.init(type: UIButton.ButtonType.custom)
+        voiceButton.setImage(UIImage.init(named: "ToolViewInputVoice"), for: UIControl.State.normal)
+        voiceButton.setImage(UIImage.init(named: "ToolViewInputVoiceHL"), for: UIControl.State.highlighted)
         _voiceButton = voiceButton
-        voiceButton.addTarget(self, action: #selector(self.voiceButtonTouch), for: UIControlEvents.touchUpInside)
+        voiceButton.addTarget(self, action: #selector(self.voiceButtonTouch), for: UIControl.Event.touchUpInside)
         toolView.addSubview(voiceButton)
         voiceButton.snp.makeConstraints { (make) in
             
@@ -174,11 +173,11 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             make.size.equalTo(CGSize(width: 35, height: 35))
         }
         
-        let keyBoardButton = UIButton.init(type: UIButtonType.custom)
-        keyBoardButton.setImage(UIImage.init(named: "ToolViewKeyboard"), for: UIControlState())
-        keyBoardButton.setImage(UIImage.init(named: "ToolViewKeyboardHL"), for: UIControlState.highlighted)
+        let keyBoardButton = UIButton.init(type: UIButton.ButtonType.custom)
+        keyBoardButton.setImage(UIImage.init(named: "ToolViewKeyboard"), for: UIControl.State.normal)
+        keyBoardButton.setImage(UIImage.init(named: "ToolViewKeyboardHL"), for: UIControl.State.highlighted)
         _keyBoardButton = keyBoardButton
-        keyBoardButton.addTarget(self, action: #selector(WKeyBoardViewController.keyBoardButtonTouch), for: UIControlEvents.touchUpInside)
+        keyBoardButton.addTarget(self, action: #selector(WKeyBoardViewController.keyBoardButtonTouch), for: UIControl.Event.touchUpInside)
         toolView.addSubview(keyBoardButton)
         keyBoardButton.snp.makeConstraints { (make) in
             
@@ -187,10 +186,10 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             make.size.equalTo(CGSize(width: 35, height: 35))
         }
         
-        let moreButton = UIButton.init(type: UIButtonType.custom)
-        moreButton.setImage(UIImage.init(named: "TypeSelectorBtn_Black"), for: UIControlState())
-        moreButton.setImage(UIImage.init(named: "TypeSelectorBtnHL_Black"), for: UIControlState.highlighted)
-        moreButton.addTarget(self, action: #selector(WKeyBoardViewController.moreButtonTouch), for: UIControlEvents.touchUpInside)
+        let moreButton = UIButton.init(type: UIButton.ButtonType.custom)
+        moreButton.setImage(UIImage.init(named: "TypeSelectorBtn_Black"), for: UIControl.State.normal)
+        moreButton.setImage(UIImage.init(named: "TypeSelectorBtnHL_Black"), for: UIControl.State.highlighted)
+        moreButton.addTarget(self, action: #selector(WKeyBoardViewController.moreButtonTouch), for: UIControl.Event.touchUpInside)
         toolView.addSubview(moreButton)
         moreButton.snp.makeConstraints { (make) in
             
@@ -199,10 +198,10 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             make.size.equalTo(CGSize(width: 35, height: 35))
         }
         
-        let emojiButton = UIButton.init(type: UIButtonType.custom)
-        emojiButton.setImage(UIImage.init(named: "ToolViewEmotion"), for: UIControlState())
-        emojiButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), for: UIControlState.highlighted)
-        emojiButton.addTarget(self, action: #selector(WKeyBoardViewController.emojiButtonTouch), for: UIControlEvents.touchUpInside)
+        let emojiButton = UIButton.init(type: UIButton.ButtonType.custom)
+        emojiButton.setImage(UIImage.init(named: "ToolViewEmotion"), for: UIControl.State.normal)
+        emojiButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), for: UIControl.State.highlighted)
+        emojiButton.addTarget(self, action: #selector(WKeyBoardViewController.emojiButtonTouch), for: UIControl.Event.touchUpInside)
         toolView.addSubview(emojiButton)
         _emojiBoardButton = emojiButton
         emojiButton.snp.makeConstraints { (make) in
@@ -230,23 +229,23 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             make.bottom.equalTo(toolView.snp.bottom).offset(-8)
         }
         
-        let sayHelloButton = UIButton.init(type: UIButtonType.custom)
+        let sayHelloButton = UIButton.init(type: UIButton.ButtonType.custom)
         sayHelloButton.layer.cornerRadius = 4
         sayHelloButton.layer.masksToBounds = true
         sayHelloButton.layer.borderColor = GlobalColor.lineColor.cgColor
         sayHelloButton.layer.borderWidth = 0.5
-        sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 245, g: 245, b: 247), size: CGSize(width: 10, height: 10)), for: UIControlState())
-        sayHelloButton.setTitle("按住说话", for: UIControlState())
+        sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 245, g: 245, b: 247), size: CGSize(width: 10, height: 10)), for: UIControl.State.normal)
+        sayHelloButton.setTitle("按住说话", for: UIControl.State.normal)
         sayHelloButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        sayHelloButton.setTitleColor(GlobalColor.RGB(r: 63, g: 63, b: 63), for: UIControlState())
+        sayHelloButton.setTitleColor(GlobalColor.RGB(r: 63, g: 63, b: 63), for: UIControl.State.normal)
         
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDown), for: UIControlEvents.touchDown)
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDownRepeat), for: UIControlEvents.touchDownRepeat)
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDragEnter), for: UIControlEvents.touchDragEnter)
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDragExit), for: UIControlEvents.touchDragExit)
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchUpInside), for: UIControlEvents.touchUpInside)
-        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchUpOutside), for: UIControlEvents.touchUpOutside)
-        sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 198, g: 199, b: 202), size: CGSize(width: 10, height: 10)), for: UIControlState.highlighted)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDown), for: UIControl.Event.touchDown)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDownRepeat), for: UIControl.Event.touchDownRepeat)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDragEnter), for: UIControl.Event.touchDragEnter)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchDragExit), for: UIControl.Event.touchDragExit)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchUpInside), for: UIControl.Event.touchUpInside)
+        sayHelloButton.addTarget(self, action: #selector(WKeyBoardViewController.TouchUpOutside), for: UIControl.Event.touchUpOutside)
+        sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 198, g: 199, b: 202), size: CGSize(width: 10, height: 10)), for: UIControl.State.highlighted)
         _sayHelloButton = sayHelloButton
         toolView.addSubview(sayHelloButton)
         sayHelloButton.snp.makeConstraints { (make) in
@@ -262,7 +261,7 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
         
     }
     
-    func voiceButtonTouch() {
+    @objc func voiceButtonTouch() {
         
         self.messagePageBackgroundTouch()
         
@@ -275,7 +274,7 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
         self.keyBoxType = .VoiceBox
     }
     
-    func keyBoardButtonTouch() {
+    @objc func keyBoardButtonTouch() {
         
         _voiceButton.isHidden = false
         _keyBoardButton.isHidden = true
@@ -286,7 +285,7 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
         self.keyBoxType = .KeyBoard
     }
     
-    func moreButtonTouch() {
+    @objc func moreButtonTouch() {
         
         switch self.keyBoxType {
         case .KeyBoard, .None:
@@ -309,7 +308,7 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             var rect = self.view.frame
             rect.origin.y = GlobalDevice.appFrameHeight-_keyBoadToolView.bounds.height-self.externBoxHeight
             
-            UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
                 
                 self.view.frame = rect
                 
@@ -331,8 +330,8 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             break
         case .EmojiBox:
             
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotion"), for: UIControlState())
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), for: UIControlState.highlighted)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotion"), for: UIControl.State.normal)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), for: UIControl.State.highlighted)
             
             self.myEmojiView?.isHidden = true
             self.myExternView?.isHidden = false
@@ -356,7 +355,7 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             var rect = self.view.frame
             rect.origin.y = GlobalDevice.appFrameHeight-_keyBoadToolView.bounds.height-self.externBoxHeight
             
-            UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
                 
                 self.view.frame = rect
                 
@@ -379,7 +378,7 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
         }
     }
     
-    func initExternView() {
+    @objc func initExternView() {
         
         let externView = MsgExternView.init(frame: CGRect.init(x: 0, y: keyBoardToolHeight, width: GlobalDevice.screenWidth, height: self.externBoxHeight))
         externView.delegate = self.externDelegate
@@ -388,7 +387,7 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
         externView.isHidden = true
     }
     
-    func initEmojiView() {
+    @objc func initEmojiView() {
         
         let emojiView = EmojiKeyBoardView.init(frame: CGRect.init(x: 0, y: keyBoardToolHeight, width: GlobalDevice.screenWidth, height: self.emojiBoxHeight))
         emojiView.delegate = self
@@ -397,7 +396,7 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
         emojiView.isHidden = true
     }
     
-    func emojiButtonTouch() {
+    @objc func emojiButtonTouch() {
         
         switch self.keyBoxType {
         case .KeyBoard:
@@ -409,8 +408,8 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             
             _inputTextView.resignFirstResponder()
             
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboard"), for: UIControlState())
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboardHL"), for: UIControlState.highlighted)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboard"), for: UIControl.State.normal)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboardHL"), for: UIControl.State.highlighted)
             
             var emojiFrame = self.myEmojiView?.frame
             emojiFrame?.origin.y = _keyBoadToolView.bounds.height
@@ -423,7 +422,7 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             var rect = self.view.frame
             rect.origin.y = GlobalDevice.appFrameHeight-_keyBoadToolView.bounds.height-self.emojiBoxHeight
             
-            UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
                 
                 self.view.frame = rect
                 
@@ -438,8 +437,8 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             self.myExternView?.isHidden = true
             self.myEmojiView?.isHidden = false
             
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboard"), for: UIControlState())
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboardHL"), for: UIControlState.highlighted)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboard"), for: UIControl.State.normal)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboardHL"), for: UIControl.State.highlighted)
             
             self.keyBoxType = .EmojiBox
             
@@ -448,8 +447,8 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             
             _inputTextView.becomeFirstResponder()
             
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotion"), for: UIControlState())
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), for: UIControlState.highlighted)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotion"), for: UIControl.State.normal)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), for: UIControl.State.highlighted)
             
             self.myExternView?.isHidden = true
             self.myEmojiView?.isHidden = true
@@ -470,13 +469,13 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             
             _inputTextView.resignFirstResponder()
             
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotion"), for: UIControlState())
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), for: UIControlState.highlighted)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotion"), for: UIControl.State.normal)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), for: UIControl.State.highlighted)
             
             var rect = self.view.frame
             rect.origin.y = GlobalDevice.appFrameHeight-_keyBoadToolView.bounds.height-self.emojiBoxHeight
             
-            UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
                 
                 self.view.frame = rect
                 
@@ -495,13 +494,13 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             
             _inputTextView.resignFirstResponder()
             
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboard"), for: UIControlState())
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboardHL"), for: UIControlState.highlighted)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboard"), for: UIControl.State.normal)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewKeyboardHL"), for: UIControl.State.highlighted)
             
             var rect = self.view.frame
             rect.origin.y = GlobalDevice.appFrameHeight-_keyBoadToolView.bounds.height-self.emojiBoxHeight
             
-            UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
                 
                 self.view.frame = rect
                 
@@ -524,13 +523,13 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
             
             self.delegate?.hideBackGroundControl()
             
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotion"), for: UIControlState())
-            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), for: UIControlState.highlighted)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotion"), for: UIControl.State.normal)
+            _emojiBoardButton.setImage(UIImage.init(named: "ToolViewEmotionHL"), for: UIControl.State.highlighted)
             
             var rect = self.view.frame
             rect.origin.y = GlobalDevice.appFrameHeight-_keyBoadToolView.bounds.height
             
-            UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
                 
                 self.view.frame = rect
                 
@@ -542,42 +541,42 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
     }
     
     
-    func TouchDown() {
+    @objc func TouchDown() {
         
-        _sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 198, g: 199, b: 202), size: CGSize(width: 10, height: 10)), for: UIControlState())
-        _sayHelloButton.setTitle("松开结束", for: UIControlState())
+        _sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 198, g: 199, b: 202), size: CGSize(width: 10, height: 10)), for: UIControl.State.normal)
+        _sayHelloButton.setTitle("松开结束", for: UIControl.State.highlighted)
         self.delegate?.WkeyBoardVoiceTouchDown()
     }
     
-    func TouchDownRepeat() {
+    @objc func TouchDownRepeat() {
         
         print("TouchDownRepeat")
     }
     
-    func TouchDragEnter() {
+    @objc func TouchDragEnter() {
         
         self.delegate?.WkeyBoardVoiceTouchDragEnter()
     }
     
-    func TouchDragExit() {
+    @objc func TouchDragExit() {
         
         self.delegate?.WkeyBoardVoiceTouchDragExit()
     }
-    func TouchUpInside() {
+    @objc func TouchUpInside() {
         
         self.sayHelloButtonNormalStatus()
         self.delegate?.WkeyBoardVoiceTouchInside()
     }
     
-    func TouchUpOutside() {
+    @objc func TouchUpOutside() {
         
         self.sayHelloButtonNormalStatus()
         self.delegate?.WkeyBoardVoiceTouchOutside()
     }
     
     func sayHelloButtonNormalStatus() {
-        _sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 245, g: 245, b: 247), size: CGSize(width: 10, height: 10)), for: UIControlState())
-        _sayHelloButton.setTitle("按住说话", for: UIControlState())
+        _sayHelloButton.setBackgroundImage(GlobalImage.imageWithColor(GlobalColor.RGB(r: 245, g: 245, b: 247), size: CGSize(width: 10, height: 10)), for: UIControl.State.normal)
+        _sayHelloButton.setTitle("按住说话", for: UIControl.State.normal)
     }
     
 //    #MARK: - UITextViewDelegate
@@ -597,7 +596,7 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
     
     func resizeHeightOfTextView(_ textView: UITextView) {
         
-        let attributes = [NSFontAttributeName:UIFont.systemFont(ofSize: 18)]
+        let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 18)]
         let option:NSStringDrawingOptions = .usesLineFragmentOrigin
         let text: NSString = textView.text as NSString
         let height = text.boundingRect(with: CGSize(width: textView.bounds.width, height: CGFloat.greatestFiniteMagnitude), options: option, attributes: attributes, context: nil).size.height
@@ -634,24 +633,24 @@ class WKeyBoardViewController: UIViewController ,UITextViewDelegate,EmojiKeyBoar
     
     func emojiKeyBoardViewDidSelectDeleteButton(emojiView: EmojiKeyBoardView) {
         
-        let inputString = _inputTextView.text
-        if inputString?.characters.count == 0 {
+        let inputString = _inputTextView.text as String
+        if inputString.count == 0 {
             return;
         }
         
-        if inputString?.characters.last != "]" {
+        if inputString.last != "]" {
             return;
         }
         
         //startIndex 第一个字符的位置
-        let startIndex: String.Index = inputString!.startIndex
+        let startIndex: String.Index = inputString.startIndex
         
         //endIndex 最后一个字符的位置
-        let endIndex: String.Index = inputString!.endIndex
+        let endIndex: String.Index = inputString.endIndex
         
         let offsetRange = startIndex ..< endIndex
         
-        let range: Range = (inputString?.range(of: "[", options: .backwards, range: offsetRange, locale: Locale.current))!
+        let range: Range = (inputString.range(of: "[", options: .backwards, range: offsetRange, locale: Locale.current))!
         if range.isEmpty {
             return
         }

@@ -18,7 +18,7 @@ class TextInfoCell: UITableViewCell {
     //内容
     var contentLabel: UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.initSubViews()

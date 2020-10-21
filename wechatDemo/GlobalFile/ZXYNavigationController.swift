@@ -29,7 +29,7 @@ class ZXYNavigationController: UINavigationController {
         navBar.barTintColor = GlobalColor.navBarBgColor
         navBar.tintColor = UIColor.white
         navBar.barStyle = UIBarStyle.black
-        navBar.titleTextAttributes = [NSForegroundColorAttributeName: GlobalColor.navTitleColor,NSFontAttributeName: GlobalFont.navTitleFont]
+        navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: GlobalColor.navTitleColor,NSAttributedString.Key.font: GlobalFont.navTitleFont]
     }
     
 }
